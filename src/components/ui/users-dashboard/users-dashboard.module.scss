@@ -1,0 +1,45 @@
+.root {
+  display: flex;
+  justify-content: center;
+  gap: 120px;
+  height: 100%;
+  width: 100%;
+
+  & .block1 {
+    display: flex;
+    justify-content: center;
+    height: 100%;
+  }
+
+  & .block2 {
+    display: flex;
+    justify-content: center;
+    height: 100%;
+  }
+
+  & .usersBlock {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+  }
+
+  & .formWrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+
+    & input {
+      padding: 4px;
+      border: 1px solid black;
+    }
+
+    & button {
+      padding: 4px 8px;
+      border: 1px solid black;
+    }
+  }
+}
