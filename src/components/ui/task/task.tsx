@@ -2,6 +2,7 @@
 import { useOptimistic, useTransition } from 'react'
 import { useRouter } from 'next/navigation'
 import { TaskType } from '@/app/tasks/type'
+import { useSession } from 'next-auth/react'
 
 export const Task = ({ task }: { task: TaskType }) => {
   const router = useRouter()

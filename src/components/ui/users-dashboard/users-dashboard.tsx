@@ -1,11 +1,20 @@
 'use client'
 import s from './users-dashboard.module.scss'
 import { useForm } from 'react-hook-form'
-import { useRouter } from 'next/navigation'
+import { redirect, useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { UserType } from '@/app/users/type'
+import { useSession } from 'next-auth/react'
 
 export function UserDashboards({ users }: { users: UserType[] }) {
+  const { data: session, status } = useSession({
+    required: true,
+    onUnauthenticated() {
+      redirect('/api/auth/signin?callbackUrl=/client')
+    }
+  })
+  console.log(status)
+
   const {
     register,
     handleSubmit,

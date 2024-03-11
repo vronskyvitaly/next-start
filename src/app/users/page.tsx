@@ -11,6 +11,7 @@ export const metadata: Metadata = {
 
 export default async function UsersPage() {
   const users: UserType[] = await fetchUsers()
+  // const session = await getServerSession()
 
   return (
     <section className={s.root}>

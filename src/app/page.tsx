@@ -1,7 +1,7 @@
-export default async function Home() {
+export default async function Page() {
   return (
-    <section className='flex min-h-screen flex-col items-center justify-between p-24'>
-      <h1 style={{ fontWeight: 900, fontSize: '40px' }}>Main page</h1>
+    <section>
+      <h1>Home</h1>
     </section>
   )
 }
