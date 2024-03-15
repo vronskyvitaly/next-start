@@ -53,7 +53,7 @@ export function UserTasks({
           cache: 'no-cache'
         })
         router.refresh()
-        console.log('Task added successfully')
+        // console.log('Task added successfully')
       } catch (error) {
         console.log('Error:', error)
       }

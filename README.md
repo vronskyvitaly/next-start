@@ -46,3 +46,9 @@ from the creators of Next.js.
 Check out our
 [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more
 details.
+
+
+## Layout in Figma
+[Sing in page](https://www.figma.com/file/pWMYiKvyLDshafNSgYu5Z5/Shop?type=design&node-id=87-1244&mode=dev)
+
+[Sing up page](https://www.figma.com/file/pWMYiKvyLDshafNSgYu5Z5/Shop?type=design&node-id=87%3A1243&mode=design&t=zbrfPQ1PBXHe4Kec-1)
