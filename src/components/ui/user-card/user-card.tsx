@@ -14,9 +14,9 @@ type Props = {
 }
 
 export function UserCard({ user, pagetype }: Props) {
-  const greeting = user?.name ? (
+  const greeting = user?.email ? (
     <div className='flex flex-col items-center p-6 bg-white rounded-lg font-bold text-5xl text-black'>
-      Hello {user?.name}!
+      Hello {user?.email}!
     </div>
   ) : null
 
@@ -36,7 +36,11 @@ export function UserCard({ user, pagetype }: Props) {
       {greeting}
       {/* {emailDisplay} */}
       {userImage}
-      <p className='text-2xl text-center'>{pagetype} Page!</p>
+      {user?.email ? (
+        ''
+      ) : (
+        <p className='text-2xl text-center'>{pagetype} Page!</p>
+      )}
     </section>
   )
 }
