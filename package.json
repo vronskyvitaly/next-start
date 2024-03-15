@@ -17,7 +17,7 @@
     "bcrypt": "^5.1.1",
     "body-parser": "^1.20.2",
     "mongodb": "^6.4.0",
-    "mongose": "^0.0.2-secuyrity",
+    "mongoose": "^8.2.1",
     "next": "14.1.1",
     "next-auth": "^4.22.1",
     "react": "^18",
