@@ -47,6 +47,6 @@ export const Large: Story = {
 export const Small: Story = {
   args: {
     size: 'small',
-    label: 'Button Next test9'
+    label: 'Button Next test10'
   }
 }
