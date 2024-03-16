@@ -1,0 +1,19 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  font-size: 12px;
+  height: 45px;
+
+  & input {
+    padding: 8px;
+    border: 1px solid black;
+    border-radius: 4px;
+  }
+}
+
+.error {
+  padding-top: 4px;
+  margin: 0;
+  font-size: 8px;
+  color: #f7095f;
+}
