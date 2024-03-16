@@ -1,5 +1,11 @@
 
-
 {
-  "projectId": "Project:Test"
+  "projectId": "Project:64cbcde96f99841e8b007d75",
+  "autoAcceptChanges": "main",
+  "exitOnceUploaded": true,
+  "externals": ["public/**"],
+  "onlyChanged": true,
+  "skip": "dependabot/**",
+  "buildScriptName": "build-storybook",
+  "zip": true
 }

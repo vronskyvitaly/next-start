@@ -28,6 +28,7 @@ export default function Navbar() {
           </>
         ) : (
           <li>
+            <Link href={'/registration'}>Sign Up</Link>
             <Link href={'/api/auth/signin'}>Sign In</Link>
           </li>
         )}

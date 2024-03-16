@@ -10,6 +10,7 @@ export function Header() {
         <Link href={'/users'}>Users</Link>
         <Link href={'/about'}>About</Link>
         <Link href={'/tasks'}>Tasks</Link>
+        <Link href={'/registration'}>Sing in</Link>
       </nav>
     </header>
   )
