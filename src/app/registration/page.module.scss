@@ -5,10 +5,34 @@
   align-items: center;
 }
 
-.wrapper {
+.formWrapper {
   display: flex;
   flex-direction: column;
   width: 100%;
   max-width: 300px;
   gap: 24px;
+
+  & .titleBlock {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+    & .title {
+      font-size: 26px;
+      font-weight: bold;
+    }
+    & .subTitleBlock {
+      display: flex;
+      gap: 12px;
+      & .subTitle {
+        font-size: 18px;
+        font-weight: bold;
+      }
+      & .link {
+        color: #013eff;
+        font-size: 18px;
+        font-weight: bold;
+      }
+    }
+  }
 }
