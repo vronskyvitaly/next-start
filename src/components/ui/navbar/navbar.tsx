@@ -27,10 +27,16 @@ export default function Navbar() {
             </li>
           </>
         ) : (
-          <li>
-            <Link href={'/registration'}>Sign Up</Link>
-            <Link href={'/api/auth/signin'}>Sign In</Link>
-          </li>
+          <div style={{ display: 'flex', gap: '10px' }}>
+            <li>
+              <Link href={'/registration'}>Sign Up</Link>
+            </li>
+            <li>
+              <Link style={{ marginLeft: '10px' }} href={'/api/auth/signin'}>
+                Sign In
+              </Link>
+            </li>
+          </div>
         )}
       </ul>
     </nav>
