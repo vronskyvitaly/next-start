@@ -1,53 +1,50 @@
 'use client'
 import s from './cards.section.module.scss'
-import { Button, CardProduct, DefaultImg } from '@/components'
-import { ComponentPropsWithRef, forwardRef } from 'react'
-import cn from 'classnames'
+import { Button, CardProduct, DefaultImg, Section } from '@/components'
+import React, { CSSProperties } from 'react'
 
-type Props = {} & ComponentPropsWithRef<'section'>
-export const CardsSection = forwardRef<HTMLElement, Props>(
-  ({ style, className }, ref) => {
-    return (
-      <section className={cn(s.root, className)} style={style} ref={ref}>
-        <div className={s.container}>
-          <div className={s.flex}>
-            <CardProduct>
-              <DefaultImg />
-              <Button title={'В корзину'} bg={'black'} />
-            </CardProduct>
-            <CardProduct>
-              <DefaultImg />
-              <Button title={'В корзину'} bg={'black'} />
-            </CardProduct>
-            <CardProduct>
-              <DefaultImg />
-              <Button title={'В корзину'} bg={'black'} />
-            </CardProduct>
-            <CardProduct>
-              <DefaultImg />
-              <Button title={'В корзину'} bg={'black'} />
-            </CardProduct>
-            <CardProduct>
-              <DefaultImg />
-              <Button title={'В корзину'} bg={'black'} />
-            </CardProduct>
-            <CardProduct>
-              <DefaultImg />
-              <Button title={'В корзину'} bg={'black'} />
-            </CardProduct>
-            <CardProduct>
-              <DefaultImg />
-              <Button title={'В корзину'} bg={'black'} />
-            </CardProduct>
-            <CardProduct>
-              <DefaultImg />
-              <Button title={'В корзину'} bg={'black'} />
-            </CardProduct>
-          </div>
+type Props = {
+  style?: CSSProperties
+}
+export const CardsSection = ({ style }: Props) => {
+  return (
+    <Section className={s.root} style={style}>
+      <div className={s.container}>
+        <div className={s.flex}>
+          <CardProduct>
+            <DefaultImg />
+            <Button title={'В корзину'} bg={'black'} />
+          </CardProduct>
+          <CardProduct>
+            <DefaultImg />
+            <Button title={'В корзину'} bg={'black'} />
+          </CardProduct>
+          <CardProduct>
+            <DefaultImg />
+            <Button title={'В корзину'} bg={'black'} />
+          </CardProduct>
+          <CardProduct>
+            <DefaultImg />
+            <Button title={'В корзину'} bg={'black'} />
+          </CardProduct>
+          <CardProduct>
+            <DefaultImg />
+            <Button title={'В корзину'} bg={'black'} />
+          </CardProduct>
+          <CardProduct>
+            <DefaultImg />
+            <Button title={'В корзину'} bg={'black'} />
+          </CardProduct>
+          <CardProduct>
+            <DefaultImg />
+            <Button title={'В корзину'} bg={'black'} />
+          </CardProduct>
+          <CardProduct>
+            <DefaultImg />
+            <Button title={'В корзину'} bg={'black'} />
+          </CardProduct>
         </div>
-      </section>
-    )
-  }
-)
-
-CardsSection.displayName = 'section'
+      </div>
+    </Section>
+  )
+}
