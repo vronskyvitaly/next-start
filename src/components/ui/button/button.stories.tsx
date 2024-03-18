@@ -46,3 +46,29 @@ export const DefaultMaxWidth: Story = {
     )
   }
 }
+
+export const DefaultBlackButton: Story = {
+  args: {
+    title: 'Click',
+    bg: 'black'
+  }
+}
+
+export const DefaultBlackMaxWidth: Story = {
+  args: {
+    title: 'Click',
+    bg: 'black'
+  },
+  render: args => {
+    return (
+      <div
+        style={{
+          display: 'flex',
+          width: '100%'
+        }}
+      >
+        <Button title={args.title} widthMax={true} bg={'black'} />
+      </div>
+    )
+  }
+}
