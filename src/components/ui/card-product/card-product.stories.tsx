@@ -20,7 +20,7 @@ export const Default: Story = {
     return (
       <CardProduct>
         <DefaultImg />
-        <Button title={'Click'} />
+        <Button title={'В корзину'} bg={'black'} />
       </CardProduct>
     )
   }

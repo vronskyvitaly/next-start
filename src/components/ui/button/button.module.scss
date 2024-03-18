@@ -17,3 +17,11 @@
     color: black;
   }
 }
+
+.bgBlack {
+  background-color: rgba(0, 0, 0, 0.95);
+
+  &:hover {
+    background-color: rgba(0, 0, 0);
+  }
+}
