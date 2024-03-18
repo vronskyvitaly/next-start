@@ -3,18 +3,12 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    height: 100vh;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
-}
 
 * {
     margin: 0;
@@ -22,7 +16,22 @@
 }
 
 body {
+
 }
+
+header {
+    flex-shrink: 0;
+}
+
+main {
+    flex-grow: 1;
+}
+
+/*footer {*/
+/*    height: 100px;*/
+/*    background-color: #21b32e;*/
+/*    flex-shrink: 0;*/
+/*}*/
 
 @layer utilities {
   .text-balance {
