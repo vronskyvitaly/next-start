@@ -1,13 +1,25 @@
 .root {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   padding: 20px 0;
-  color: white;
   background-color: black;
 
-  & nav {
+  & .container {
+    width: 100%;
+    max-width: 1240px;
+    min-height: 100%;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  & .flex {
     display: flex;
-    gap: 20px;
+    justify-content: center;
+  }
+
+  & .links {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    width: 100%;
+    color: white;
   }
 }
