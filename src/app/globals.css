@@ -16,14 +16,13 @@ header {
 }
 
 main {
+    height: 100vh;
     flex-grow: 1;
 }
 
-/*footer {*/
-/*    height: 100px;*/
-/*    background-color: #21b32e;*/
-/*    flex-shrink: 0;*/
-/*}*/
+footer {
+    flex-shrink: 0;
+}
 
 
 /*Globals*/
