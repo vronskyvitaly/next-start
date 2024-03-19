@@ -8,7 +8,7 @@ export const BanerSection = () => {
           borderRadius={'4px'}
           backgroundColor={'#E3E3E3'}
           height={'220px'}
-          width={'1240px'}
+          width={'100%'}
         />
       </div>
     </Section>
