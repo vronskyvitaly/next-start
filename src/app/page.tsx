@@ -1,12 +1,12 @@
 import s from './page.module.scss'
-import { Button, CardProduct } from '@/components'
+import { BanerSection } from '@/components/sections/baner-section'
+import { CardsSection } from '@/components/sections/cards-section'
 
 export default async function HomePage() {
   return (
     <article className={s.root}>
-      <CardProduct>
-        <Button title={'В корзину'} bg={'black'} />
-      </CardProduct>
+      <BanerSection />
+      <CardsSection />
     </article>
   )
 }
