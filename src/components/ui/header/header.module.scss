@@ -21,5 +21,12 @@
     gap: 10px;
     width: 100%;
     color: white;
+    list-style-type: none;
+    & a {
+      color: white;
+      &:hover {
+        color: #013eff;
+      }
+    }
   }
 }

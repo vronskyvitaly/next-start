@@ -2,22 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
+/*root*/
 :root {
     display: flex;
     width: 100%;
     flex-direction: column;
     height: 100vh;
     font-family: "Inter", sans-serif;
-}
-
-
-* {
-    margin: 0;
-    padding: 0;
-}
-
-body {
-
 }
 
 header {
@@ -33,6 +24,50 @@ main {
 /*    background-color: #21b32e;*/
 /*    flex-shrink: 0;*/
 /*}*/
+
+
+/*Globals*/
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+/*Tags*/
+button {
+    border-style: none;
+}
+
+a,
+a:visited {
+    cursor: pointer;
+    text-decoration: none;
+}
+
+
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+
+input,
+button,
+select,
+textarea,
+optgroup,
+option {
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    font-style: inherit;
+    color: inherit;
+}
+
 
 @layer utilities {
   .text-balance {
