@@ -1,10 +1,12 @@
 import s from './page.module.scss'
-import { CardsSection } from '@components/sections/cards-section'
+import { Button, CardProduct } from '@/components'
 
 export default async function HomePage() {
   return (
     <article className={s.root}>
-      <CardsSection />
+      <CardProduct>
+        <Button title={'В корзину'} bg={'black'} />
+      </CardProduct>
     </article>
   )
 }
