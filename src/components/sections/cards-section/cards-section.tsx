@@ -1,6 +1,6 @@
 'use client'
 import s from './cards.section.module.scss'
-import { Button, CardProduct, DefaultImg, Section } from '@/components'
+import { Button, CardProduct, Section } from '@/components'
 import React, { CSSProperties } from 'react'
 
 type Props = {
@@ -12,35 +12,27 @@ export const CardsSection = ({ style }: Props) => {
       <div className={s.container}>
         <div className={s.flex}>
           <CardProduct>
-            <DefaultImg />
             <Button title={'В корзину'} bg={'black'} />
           </CardProduct>
           <CardProduct>
-            <DefaultImg />
             <Button title={'В корзину'} bg={'black'} />
           </CardProduct>
           <CardProduct>
-            <DefaultImg />
             <Button title={'В корзину'} bg={'black'} />
           </CardProduct>
           <CardProduct>
-            <DefaultImg />
             <Button title={'В корзину'} bg={'black'} />
           </CardProduct>
           <CardProduct>
-            <DefaultImg />
             <Button title={'В корзину'} bg={'black'} />
           </CardProduct>
           <CardProduct>
-            <DefaultImg />
             <Button title={'В корзину'} bg={'black'} />
           </CardProduct>
           <CardProduct>
-            <DefaultImg />
             <Button title={'В корзину'} bg={'black'} />
           </CardProduct>
           <CardProduct>
-            <DefaultImg />
             <Button title={'В корзину'} bg={'black'} />
           </CardProduct>
         </div>

@@ -1,0 +1,12 @@
+.root {
+  width: 100%;
+  padding: 40px 0;
+  background-color: red;
+  & .container {
+    width: 100%;
+    max-width: 1240px;
+    min-height: 100%;
+    margin: 0 auto;
+    //padding: 0 15px;
+  }
+}
