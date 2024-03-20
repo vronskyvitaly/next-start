@@ -25,3 +25,21 @@
     background-color: rgba(0, 0, 0);
   }
 }
+
+.bgBlue {
+  padding: 14px 26px;
+  background-color: #013eff;
+  &:hover {
+    background-color: #013eff;
+  }
+}
+
+.bgWhite {
+  padding: 14px 26px;
+  background-color: white;
+  border: 1px solid #013eff;
+  color: black;
+  &:hover {
+    background-color: white;
+  }
+}

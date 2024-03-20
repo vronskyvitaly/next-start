@@ -7,7 +7,7 @@ type Props = {
   disabled?: boolean
   onClick?: () => void
   widthMax?: boolean
-  bg?: 'green' | 'black'
+  bg?: 'green' | 'black' | 'blue' | 'white'
 }
 export const Button = ({
   title,
@@ -23,6 +23,10 @@ export const Button = ({
           return s.root
         case 'black':
           return cn(s.root, s.bgBlack)
+        case 'blue':
+          return cn(s.root, s.bgBlue)
+        case 'white':
+          return cn(s.root, s.bgWhite)
         default:
           return s.root
       }

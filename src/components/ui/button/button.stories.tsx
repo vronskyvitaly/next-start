@@ -72,3 +72,41 @@ export const DefaultBlackMaxWidth: Story = {
     )
   }
 }
+
+export const DefaultButtonBlue: Story = {
+  args: {
+    title: 'Click',
+    bg: 'blue'
+  },
+  render: args => {
+    return (
+      <div
+        style={{
+          display: 'flex',
+          width: '100%'
+        }}
+      >
+        <Button title={args.title} widthMax={false} bg={args.bg} />
+      </div>
+    )
+  }
+}
+
+export const TransparentButton: Story = {
+  args: {
+    title: 'Click',
+    bg: 'white'
+  },
+  render: args => {
+    return (
+      <div
+        style={{
+          display: 'flex',
+          width: '100%'
+        }}
+      >
+        <Button title={args.title} widthMax={false} bg={args.bg} />
+      </div>
+    )
+  }
+}
