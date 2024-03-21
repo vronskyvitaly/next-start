@@ -11,13 +11,18 @@ const meta: Meta<typeof Input> = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-//
 export const Default: Story = {
   args: {
     placeholder: 'Default placeholder'
   }
 }
 
+export const DefaultInputError: Story = {
+  args: {
+    placeholder: 'Default placeholder',
+    errorMassage: 'wrong'
+  }
+}
 export const Search: Story = {
   args: {
     type: 'search',
