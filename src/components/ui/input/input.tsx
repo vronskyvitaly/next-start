@@ -11,12 +11,13 @@ export const Input = forwardRef<HTMLInputElement, Props>(
     {
       placeholder,
       type = 'text' || 'password' || ('search' as const),
-      errorMassage
+      errorMassage,
+      style
     },
     ref
   ) => {
     return (
-      <div className={s.root}>
+      <div className={s.root} style={style}>
         <input
           type={type}
           ref={ref}
