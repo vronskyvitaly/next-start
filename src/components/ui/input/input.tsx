@@ -1,16 +1,28 @@
 'use client'
 import s from './input.module.scss'
-import { ComponentPropsWithRef, forwardRef, JSX } from 'react'
+import { ComponentPropsWithRef, forwardRef } from 'react'
 
 type Props = {
   errorMassage?: string
 } & ComponentPropsWithRef<'input'>
 
 export const Input = forwardRef<HTMLInputElement, Props>(
-  ({ placeholder, type = 'text' || 'password', errorMassage }, ref) => {
+  (
+    {
+      placeholder,
+      type = 'text' || 'password' || ('search' as const),
+      errorMassage
+    },
+    ref
+  ) => {
     return (
       <div className={s.root}>
-        <input type={type} ref={ref} placeholder={placeholder} />
+        <input
+          type={type}
+          ref={ref}
+          placeholder={placeholder}
+          className={type === 'search' ? s.search : ''}
+        />
         <span className={s.error}>{errorMassage ?? ' '}</span>
       </div>
     )
