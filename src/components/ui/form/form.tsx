@@ -1,6 +1,7 @@
-import s from './form-wrapper.module.scss'
+import s from './form.module.scss'
 import { ComponentPropsWithRef, forwardRef } from 'react'
 import Link from 'next/link'
+import cn from 'classnames'
 
 type Props = {
   children: React.ReactNode
@@ -9,7 +10,7 @@ type Props = {
   formTitleLink?: string | null
   hrefLink?: string | null
 } & ComponentPropsWithRef<'form'>
-export const FormWrapper = forwardRef<HTMLFormElement, Props>(
+export const Form = forwardRef<HTMLFormElement, Props>(
   (
     {
       children,
@@ -18,12 +19,18 @@ export const FormWrapper = forwardRef<HTMLFormElement, Props>(
       formSubtitle = null,
       formTitleLink = null,
       hrefLink = '',
-      style
+      style,
+      className
     },
     ref
   ) => {
     return (
-      <form ref={ref} style={style} className={s.root} onSubmit={onSubmit}>
+      <form
+        ref={ref}
+        style={style}
+        className={cn(s.root, className)}
+        onSubmit={onSubmit}
+      >
         <div className={formTitle ? s.titleBlock : s.displayNone}>
           <h4 className={s.title}>{formTitle}</h4>
           <div className={formSubtitle ? s.subTitleBlock : s.displayNone}>
@@ -41,4 +48,4 @@ export const FormWrapper = forwardRef<HTMLFormElement, Props>(
   }
 )
 
-FormWrapper.displayName = 'FormWrapper'
+Form.displayName = 'Form'

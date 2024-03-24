@@ -1,11 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import { FormWrapper } from './form-wrapper'
+import { Form } from './form'
 import { Input } from '../input'
 import { Button } from '../button'
 
-const meta: Meta<typeof FormWrapper> = {
-  title: 'Components/FormWrapper',
-  component: FormWrapper,
+const meta: Meta<typeof Form> = {
+  title: 'Components/Form',
+  component: Form,
   tags: ['autodocs']
 }
 
@@ -13,21 +13,33 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
-  args: {
-    formTitle: 'FormWrapper title',
-    formSubtitle: 'New orm subtitle'
-  },
-  render: ({ formTitle, formSubtitle }) => {
+  args: {},
+  render: () => {
     return (
-      <FormWrapper formTitle={formTitle} formSubtitle={formSubtitle}>
+      <Form>
         <Input type={'email'} placeholder={'Your email'} />
         <Input type={'email'} placeholder={'Your password'} />
         <Button title={'Click'} />
-      </FormWrapper>
+      </Form>
     )
   }
 }
 
+export const DefaultAndTitle: Story = {
+  args: {
+    formTitle: 'Form title',
+    formSubtitle: 'New orm subtitle'
+  },
+  render: ({ formTitle, formSubtitle }) => {
+    return (
+      <Form formTitle={formTitle} formSubtitle={formSubtitle}>
+        <Input type={'email'} placeholder={'Your email'} />
+        <Input type={'email'} placeholder={'Your password'} />
+        <Button title={'Click'} />
+      </Form>
+    )
+  }
+}
 export const LogInForm: Story = {
   args: {
     formTitle: 'Log in to your account',
@@ -37,7 +49,7 @@ export const LogInForm: Story = {
   },
   render: ({ formTitle, formSubtitle, hrefLink, formTitleLink }) => {
     return (
-      <FormWrapper
+      <Form
         formTitle={formTitle}
         formSubtitle={formSubtitle}
         formTitleLink={formTitleLink}
@@ -46,7 +58,7 @@ export const LogInForm: Story = {
         <Input type={'email'} placeholder={'Your email'} />
         <Input type={'password'} placeholder={'Your password'} />
         <Button title={'Sing in'} />
-      </FormWrapper>
+      </Form>
     )
   }
 }
@@ -60,7 +72,7 @@ export const SingUpForm: Story = {
   },
   render: ({ formTitle, formSubtitle, hrefLink, formTitleLink }) => {
     return (
-      <FormWrapper
+      <Form
         formTitle={formTitle}
         formSubtitle={formSubtitle}
         formTitleLink={formTitleLink}
@@ -71,29 +83,42 @@ export const SingUpForm: Story = {
         <Input type={'email'} placeholder={'Your email'} />
         <Input type={'password'} placeholder={'Your password'} />
         <Button title={'Sing up'} />
-      </FormWrapper>
+      </Form>
     )
   }
 }
 
-export const SerchForm: Story = {
+/**
+ * Example with black background
+ */
+export const SearchForm: Story = {
   args: {},
   render: () => {
     return (
-      <FormWrapper
+      <div
         style={{
-          flexDirection: 'row',
-          maxWidth: '620px',
-          gap: '12px'
+          backgroundColor: 'black',
+          height: '300px',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center'
         }}
       >
-        <Input
-          style={{ width: '100%' }}
-          type={'search'}
-          placeholder={'Your First name'}
-        />
-        <Button bg={'blue'} title={'Serch'} />
-      </FormWrapper>
+        <Form
+          style={{
+            flexDirection: 'row',
+            maxWidth: '620px',
+            gap: '12px'
+          }}
+        >
+          <Input
+            style={{ width: '100%' }}
+            type={'search'}
+            placeholder={'Search'}
+          />
+          <Button bg={'blue'} title={'Search'} />
+        </Form>
+      </div>
     )
   }
 }
