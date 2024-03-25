@@ -1,32 +1,19 @@
+@import '@/app/mixins.scss';
 .root {
-  padding: 20px 0;
-  background-color: black;
+  padding: 24px 0;
+  background-color: var(--color-dark-900);
 
   & .container {
-    width: 100%;
-    max-width: 1240px;
-    min-height: 100%;
-    margin: 0 auto;
-    padding: 0 1.5rem;
+    @include container();
   }
 
   & .flex {
-    display: flex;
-    justify-content: center;
+    @include flex($justify: space-between, $align: center);
   }
 
-  & .links {
+  & .iconsBlock {
     display: flex;
-    justify-content: space-between;
-    gap: 10px;
-    width: 100%;
-    color: white;
-    list-style-type: none;
-    & a {
-      color: white;
-      &:hover {
-        color: #013eff;
-      }
-    }
+    color: var(--color-light-100);
+    gap: 21px;
   }
 }
