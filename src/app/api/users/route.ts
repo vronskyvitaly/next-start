@@ -3,7 +3,6 @@ import Users from '@/models/user'
 import { connectToDB } from '@/utils/db'
 import bcrypt from 'bcrypt'
 import { unstable_noStore as noStore } from 'next/cache'
-import { connection } from 'mongoose'
 
 export const GET = async (request: NextRequest) => {
   noStore()
