@@ -21,7 +21,7 @@ export const CardProduct = ({
 }: Props) => {
   return (
     <div className={s.root}>
-      <Link className={s.actionWrapper} href={`/card/${id}`}>
+      <Link target={'_blank'} className={s.actionWrapper} href={`/card/${id}`}>
         <DefaultImg />
         <span className={s.cardBlockPrice}>
           <p className={s.price}>{price}</p>
