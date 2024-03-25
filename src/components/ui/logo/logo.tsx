@@ -1,5 +1,10 @@
 import s from './logo.module.scss'
+import Link from 'next/link'
 
 export const Logo = () => {
-  return <h1 className={s.root}>Logo</h1>
+  return (
+    <Link href={'/'} className={s.root}>
+      Logo
+    </Link>
+  )
 }
