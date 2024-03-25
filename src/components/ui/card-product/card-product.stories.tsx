@@ -19,10 +19,6 @@ export const Default: Story = {
     price: 3400
   },
   render: args => {
-    return (
-      <CardProduct>
-        <Button title={'B корзину'} bg={'black'} />
-      </CardProduct>
-    )
+    return <CardProduct />
   }
 }
