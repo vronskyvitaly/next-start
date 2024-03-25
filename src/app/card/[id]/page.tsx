@@ -1,4 +1,4 @@
-import { fetchCard } from './action'
+import { fetchCard } from './actions'
 import { Card } from '@/app/api/cards/type'
 
 export default async function CardPage({ params }: { params: { id: string } }) {
