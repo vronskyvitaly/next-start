@@ -95,6 +95,13 @@ export const PriseV3: Story = {
   }
 }
 
+export const PriseV4: Story = {
+  args: {
+    variant: TypographyVariant.PriseV4,
+    children: 'PriseV4 text'
+  }
+}
+
 export const Caption: Story = {
   args: {
     variant: TypographyVariant.Caption,

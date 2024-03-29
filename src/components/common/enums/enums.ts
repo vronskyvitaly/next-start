@@ -9,6 +9,7 @@ export enum TypographyVariant {
   PriseV1 = 'priseV1',
   PriseV2 = 'priseV2',
   PriseV3 = 'priseV3',
+  PriseV4 = 'priseV4',
   Caption = 'caption',
   ButtonText = 'buttonText',
   Discord = 'discord',
