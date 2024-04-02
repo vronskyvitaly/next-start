@@ -16,4 +16,9 @@
     color: var(--color-light-100);
     gap: 21px;
   }
+
+  & .link {
+    text-decoration: none;
+    color: var(--color-light-100);
+  }
 }
