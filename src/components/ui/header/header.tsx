@@ -32,12 +32,14 @@ export const Header = () => {
                 'https://static.vecteezy.com/system/resources/thumbnails/004/798/846/small/shopping-cart-logo-or-icon-design-vector.jpg'
               }
             />
-            <IconWrapper
-              subTitle={'Избранное'}
-              srcImg={
-                'https://static.vecteezy.com/system/resources/thumbnails/004/798/846/small/shopping-cart-logo-or-icon-design-vector.jpg'
-              }
-            />
+            <Link href={'/favorite'} className={s.link}>
+              <IconWrapper
+                subTitle={'Избранное'}
+                srcImg={
+                  'https://static.vecteezy.com/system/resources/thumbnails/004/798/846/small/shopping-cart-logo-or-icon-design-vector.jpg'
+                }
+              />
+            </Link>
             <Link href={'/basket'} className={s.link}>
               <IconWrapper
                 subTitle={'Корзина'}
