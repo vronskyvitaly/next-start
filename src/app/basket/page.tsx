@@ -1,5 +1,4 @@
 'use client'
-import type { Metadata } from 'next'
 import s from './page.module.scss'
 import { decrement, increment } from '@/store/slise'
 import { useDispatch, useSelector } from 'react-redux'

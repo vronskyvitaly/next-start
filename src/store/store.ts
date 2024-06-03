@@ -7,6 +7,9 @@ export const store = configureStore({
   }
 })
 
+/**
+ * Added from redux documentation https://redux-toolkit.js.org/tutorials/quick-start
+ * */
 // Infer the `RootState` and `AppDispatch` types from the store itself
 export type RootState = ReturnType<typeof store.getState>
 // Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
