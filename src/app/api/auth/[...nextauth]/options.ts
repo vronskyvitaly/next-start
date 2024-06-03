@@ -1,7 +1,7 @@
 import type { NextAuthOptions } from 'next-auth'
 import GitHubProvider from 'next-auth/providers/github'
 import CredentialsProvider from 'next-auth/providers/credentials'
-import { connectToDB } from '@/utils/db'
+import { connectToDB } from '@/common/utils/db'
 import bcrypt from 'bcrypt'
 import Users from '@/models/user'
 

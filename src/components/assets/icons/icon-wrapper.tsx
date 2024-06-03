@@ -1,5 +1,5 @@
 import { Typography } from '@/components/ui/typography/typography'
-import { TypographyVariant } from '@/components/common/enums'
+import { TypographyVariant } from '../../../common/utils/enums'
 
 type Props = {
   subTitle?: string

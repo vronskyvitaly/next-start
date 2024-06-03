@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './_styles/globals.scss'
 
-import AuthProvider from '@/utils/auth-provider'
+import AuthProvider from '@/common/utils/auth-provider'
 import { Header } from '@/components'
 import { Footer } from '@/components/ui/footer'
 import StoreProvider from '@/app/store-provider'
