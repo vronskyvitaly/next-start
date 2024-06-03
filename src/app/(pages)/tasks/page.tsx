@@ -1,6 +1,6 @@
 import s from './page.module.scss'
-import { getAllTasks } from '@/app/tasks/actions'
-import { TaskType } from '@/app/tasks/type'
+import { getAllTasks } from '@/app/(pages)/tasks/actions'
+import { TaskType } from '@/app/(pages)/tasks/type'
 
 export default async function TasksPage() {
   const tasks: TaskType[] = await getAllTasks()

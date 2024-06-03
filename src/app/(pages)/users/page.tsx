@@ -2,7 +2,7 @@ import s from './page.module.scss'
 import { UserType } from './type'
 import type { Metadata } from 'next'
 import { UserDashboards } from '@/components'
-import { fetchUsers } from '@/app/users/actions'
+import { fetchUsers } from '@/app/(pages)/users/actions'
 
 export const metadata: Metadata = {
   title: 'Users page',

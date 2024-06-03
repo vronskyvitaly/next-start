@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form'
 import { useRouter } from 'next/navigation'
 import { useOptimistic, useTransition } from 'react'
 import { Task } from '@/components'
-import { TaskType } from '@/app/tasks/type'
+import { TaskType } from '@/app/(pages)/tasks/type'
 
 export function UserTasks({
   tasks = [],

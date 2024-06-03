@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
-import './globals.scss'
+import './_styles/globals.scss'
 
 import AuthProvider from '@/utils/auth-provider'
 import { Header } from '@/components'

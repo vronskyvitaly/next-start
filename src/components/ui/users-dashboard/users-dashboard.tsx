@@ -3,7 +3,7 @@ import s from './users-dashboard.module.scss'
 import { useForm } from 'react-hook-form'
 import { redirect, useRouter } from 'next/navigation'
 import Link from 'next/link'
-import { UserType } from '@/app/users/type'
+import { UserType } from '@/app/(pages)/users/type'
 import { useSession } from 'next-auth/react'
 
 export function UserDashboards({ users }: { users: UserType[] }) {

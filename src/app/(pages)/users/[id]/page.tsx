@@ -1,6 +1,6 @@
 import s from './page.module.scss'
 import { UserTasks } from '@/components'
-import { fetchTasksUser, fetchUserById } from '@/app/users/actions'
+import { fetchTasksUser, fetchUserById } from '@/app/(pages)/users/actions'
 
 export default async function UserPage({ params }: { params: { id: string } }) {
   // const user = await fetchUserById(params.id)
