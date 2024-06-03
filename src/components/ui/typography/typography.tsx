@@ -3,7 +3,7 @@ import { ComponentPropsWithoutRef, ElementType } from 'react'
 import cn from 'classnames'
 
 import s from './typography.module.scss'
-import { TypographyVariant } from '@/common/utils/enums/enums'
+import { TypographyVariant } from '@/components/ui/typography/enums'
 
 export type TypographyProps<T extends ElementType = 'p'> = {
   as?: T

@@ -1,1 +1,1 @@
-export * from './enums'
+export * from '../../../components/ui/typography/typographyVariant'
