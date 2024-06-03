@@ -1,18 +1,46 @@
 'use client'
 import s from './page.module.scss'
-import { decrement, increment } from '@/store/slise'
-import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from '@/store/store'
+
+import { useAppDispatch, useAppSelector } from '@/common/hooks'
+import {
+  decrementCount,
+  incrementCount,
+  resetValueCount,
+  setCount
+} from '@/lib/features/counter-slice'
 
 export default function BasketPage() {
-  const count = useSelector((state: RootState) => state.counter.value)
-  const dispatch = useDispatch()
+  const count = useAppSelector(setCount)
+  const dispatch = useAppDispatch()
+
+  const handleReset = () => {
+    dispatch(resetValueCount()) // Вызываем действие resetValueCount для сброса значения счетчика
+  }
+
   return (
     <article className={s.root}>
       <h1>Корзина</h1>
       <h2>{count}</h2>
-      <button onClick={() => dispatch(increment())}>+</button>
-      <button onClick={() => dispatch(decrement())}>-</button>
+      <div style={{ display: 'flex', gap: '20px' }}>
+        <button
+          style={{ padding: '10px', borderRadius: '30px' }}
+          onClick={() => dispatch(incrementCount())}
+        >
+          +
+        </button>
+        <button
+          style={{ padding: '10px', borderRadius: '30px' }}
+          onClick={() => dispatch(decrementCount())}
+        >
+          -
+        </button>
+        <button
+          style={{ padding: '10px', borderRadius: '30px' }}
+          onClick={handleReset}
+        >
+          Reset
+        </button>
+      </div>
     </article>
   )
 }

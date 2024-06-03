@@ -5,7 +5,7 @@ import './globals.scss'
 import AuthProvider from '@/utils/auth-provider'
 import { Header } from '@/components'
 import { Footer } from '@/components/ui/footer'
-import { StoreProvider } from '@/store/store-provider'
+import StoreProvider from '@/app/store-provider'
 
 const inter = Inter({ subsets: ['latin'] })
 
