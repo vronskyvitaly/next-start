@@ -1,15 +1,14 @@
 import s from './cards.section.module.scss'
 import { CardProduct, Section } from '@/components'
 import React, { CSSProperties } from 'react'
-import { fetchCards } from './actions'
 import { Card } from '@/app/api/cards/type'
 
 type Props = {
   style?: CSSProperties
+  cards: Card[]
 }
 
-export async function CardsSection({ style }: Props) {
-  const cards: Card[] = await fetchCards()
+export async function CardsSection({ style, cards }: Props) {
   return (
     <Section className={s.root} style={style}>
       <div className={s.container}>
