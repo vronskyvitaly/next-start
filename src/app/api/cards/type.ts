@@ -4,4 +4,5 @@ export type Card = {
   price: number
   discount: number
   hrefIng: string | null
+  basket: boolean
 }

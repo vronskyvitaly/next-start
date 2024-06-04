@@ -4,8 +4,34 @@ import { Button, Form, Input, Logo } from '@/components'
 
 import { IconWrapper } from '@/components/assets/icons/icon-wrapper'
 import Link from 'next/link'
+import { Card } from '@/app/api/cards/type'
+import { useEffect } from 'react'
+import { useAppDispatch } from '@/common/hooks'
+import { basketSlice } from '@/lib/features/basket-slice'
+import { useSelector } from 'react-redux'
+import { RootState } from '@/lib/store'
 
-export const Header = () => {
+type HeaderProps = {
+  cards: Card[]
+}
+
+export const Header = ({ cards }: HeaderProps) => {
+  const dispatch = useAppDispatch()
+
+  /***
+   * Saving cards to localStorage
+   */
+  useEffect(() => {
+    // Преобразование объекта cards в строку JSON
+    const cardsJSON = JSON.stringify(cards)
+    // Сохранение строки JSON в локальном хранилище
+    localStorage.setItem('cards', cardsJSON)
+
+    // Распарс строки JSON и загрузка карточек в Redux-состояние
+    const parsedCards: Card[] = JSON.parse(cardsJSON)
+    dispatch(basketSlice.actions.fetchCards(parsedCards))
+  }, [cards])
+
   return (
     <header className={s.root}>
       <div className={s.container}>
