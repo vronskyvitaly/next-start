@@ -14,11 +14,13 @@ type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
   args: {
+    id: '111111222222',
     title: 'Nike',
     discount: 6000,
-    price: 3400
+    price: 3400,
+    basket: false
   },
   render: args => {
-    return <CardProduct />
+    return <CardProduct {...args} />
   }
 }
