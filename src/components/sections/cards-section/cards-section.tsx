@@ -1,14 +1,18 @@
+'use client'
+
 import s from './cards.section.module.scss'
 import { CardProduct, Section } from '@/components'
 import React, { CSSProperties } from 'react'
-import { Card } from '@/app/api/cards/type'
+import { useSelector } from 'react-redux'
+import { RootState } from '@/lib/store'
 
 type Props = {
   style?: CSSProperties
-  cards: Card[]
 }
 
-export async function CardsSection({ style, cards }: Props) {
+export function CardsSection({ style }: Props) {
+  const cards = useSelector((state: RootState) => state.basket.basket)
+
   return (
     <Section className={s.root} style={style}>
       <div className={s.container}>
@@ -21,6 +25,7 @@ export async function CardsSection({ style, cards }: Props) {
                 key={c._id}
                 discount={c.discount}
                 price={c.price}
+                basket={c.basket}
               ></CardProduct>
             )
           })}
