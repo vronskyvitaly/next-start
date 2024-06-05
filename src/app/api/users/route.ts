@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import Users from '@/models/user'
-import { connectToDB } from '@/utils/db'
+import { connectToDB } from '@/common/utils/db'
 import bcrypt from 'bcrypt'
 import { unstable_noStore as noStore } from 'next/cache'
 

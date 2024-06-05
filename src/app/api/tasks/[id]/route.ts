@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { connectToDB } from '@/utils/db'
+import { connectToDB } from '@/common/utils/db'
 import Users from '@/models/user'
 import Tasks from '@/models/tasks'
 import User from '@/models/user'

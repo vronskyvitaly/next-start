@@ -2,7 +2,7 @@
 import s from './header.module.scss'
 import { Button, Form, Input, Logo } from '@/components'
 
-import { IconWrapper } from '@/components/assets/icons/icon-wrapper'
+import { IconWrapper } from '@/assets/icons/icon-wrapper'
 import Link from 'next/link'
 import { Card } from '@/app/api/cards/type'
 import { useEffect } from 'react'
