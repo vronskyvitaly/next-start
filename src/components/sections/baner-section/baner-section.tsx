@@ -9,6 +9,9 @@ export const BanerSection = () => {
           backgroundColor={'#E3E3E3'}
           height={'220px'}
           width={'100%'}
+          defaultImgTitle={
+            'Здесь будет банер с часто выбираемых пользователем карточек ⚒️'
+          }
         />
       </div>
     </Section>
