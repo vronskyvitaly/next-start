@@ -1,8 +1,7 @@
 'use client'
 import s from './header.module.scss'
-import { Button, Form, Input, Logo } from '@/components'
+import { Button, Form, IconWrapper, Input, Logo } from '@/components'
 
-import { IconWrapper } from '@/assets/icons/icon-wrapper'
 import Link from 'next/link'
 import { Card } from '@/app/api/cards/type'
 import { useEffect } from 'react'
@@ -17,6 +16,11 @@ type HeaderProps = {
 
 export const Header = ({ cards }: HeaderProps) => {
   const dispatch = useAppDispatch()
+  const cardBasket = useSelector((state: RootState) => state.basket.basket)
+
+  const getBasketItemCount = () => {
+    return cardBasket.filter(el => el.basket).length
+  }
 
   /***
    * Saving cards to localStorage
@@ -64,14 +68,17 @@ export const Header = ({ cards }: HeaderProps) => {
                 'https://static.vecteezy.com/system/resources/thumbnails/004/798/846/small/shopping-cart-logo-or-icon-design-vector.jpg'
               }
             />
-            <Link href={'/basket'} className={s.link}>
-              <IconWrapper
-                subTitle={'Корзина'}
-                srcImg={
-                  'https://static.vecteezy.com/system/resources/thumbnails/004/798/846/small/shopping-cart-logo-or-icon-design-vector.jpg'
-                }
-              />
-            </Link>
+            <div>
+              <Link href={'/basket'} className={s.link}>
+                <IconWrapper
+                  counter={getBasketItemCount()}
+                  subTitle={'Корзина'}
+                  srcImg={
+                    'https://static.vecteezy.com/system/resources/thumbnails/004/798/846/small/shopping-cart-logo-or-icon-design-vector.jpg'
+                  }
+                />
+              </Link>
+            </div>
           </div>
         </div>
       </div>
