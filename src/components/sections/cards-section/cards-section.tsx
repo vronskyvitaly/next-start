@@ -4,14 +4,14 @@ import s from './cards.section.module.scss'
 import { CardProduct, Section } from '@/components'
 import React, { CSSProperties } from 'react'
 import { useSelector } from 'react-redux'
-import { RootState } from '@/lib/store'
+import { setBasketSelector } from '@/lib/features/basket-slice'
 
 type Props = {
   style?: CSSProperties
 }
 
 export function CardsSection({ style }: Props) {
-  const cards = useSelector((state: RootState) => state.basket.basket)
+  const cards = useSelector(setBasketSelector)
 
   return (
     <Section className={s.root} style={style}>
