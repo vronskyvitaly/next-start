@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import User from '@/models/user'
 import { unstable_noStore as noStore } from 'next/cache'
-import { connectToDB } from '@/utils/db'
+import { connectToDB } from '@/common/utils/db'
 
 export const GET = async (
   request: NextRequest,
