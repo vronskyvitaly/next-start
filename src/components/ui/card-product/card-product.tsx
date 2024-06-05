@@ -4,10 +4,8 @@ import React, { useState } from 'react'
 import { DefaultImg } from '../default-img'
 import { Button } from '../button'
 import Link from 'next/link'
-import { useAppDispatch } from '@/common/hooks'
-import { basketSlice } from '@/lib/features/basket-slice'
-import { useSelector } from 'react-redux'
-import { RootState } from '@/lib/store'
+import { useAppDispatch, useAppSelector } from '@/common/hooks'
+import { basketSlice, setBasketSelector } from '@/lib/features/basket-slice'
 
 type Props = {
   children?: React.ReactNode
@@ -26,23 +24,16 @@ export const CardProduct = ({
   basket
 }: Props) => {
   const dispatch = useAppDispatch()
-  const cardsSl = useSelector((state: RootState) => state.basket.basket)
-  const [buttonTitle, setButtonTitle] = useState<'В корзине' | 'В корзину'>(
-    'В корзину'
-  )
-  const [buttonColor, setButtonColor] = useState<'green' | 'black'>('black')
+  const cardsSl = useAppSelector(setBasketSelector)
+  const [cardIsBasket, setCardIsBasket] = useState<boolean>(basket)
 
   const changeBasketStatus = (id: string, status: boolean) => {
-    // Очистка локального хранилища
-    localStorage.removeItem('cards')
-
-    // Изменение статуса свойства basket на противоположное!
-    dispatch(basketSlice.actions.isBasketStatus({ id, status: !status }))
-
     // Возвращаю новый массив с объновленными данными
     const newCardsData = cardsSl.map(el =>
       el._id === id ? { ...el, basket: !status } : el
     )
+    // Изменение статуса свойства basket на противоположное!
+    dispatch(basketSlice.actions.isBasketStatus({ id, status: !status }))
 
     // Преобразование массив в формат JSON
     const newCardsDataJSON = JSON.stringify(newCardsData)
@@ -51,15 +42,9 @@ export const CardProduct = ({
     localStorage.setItem('cards', newCardsDataJSON)
   }
 
-  const changeButtonTitle = () => {
-    setButtonTitle(prevState =>
-      prevState === 'В корзину' ? 'В корзине' : 'В корзину'
-    )
-    setButtonColor(prevState => (prevState === 'black' ? 'green' : 'black'))
+  const changeButtonIsBasketStatus = () => {
+    setCardIsBasket(prevState => !prevState)
   }
-
-  // todo: ❌После проверки удалить
-  // console.log(cardsSl)
 
   return (
     <div className={s.root}>
@@ -73,11 +58,11 @@ export const CardProduct = ({
       </Link>
 
       <Button
-        title={buttonTitle}
-        bg={buttonColor}
+        title={cardIsBasket ? 'B корзине' : 'В корзину'}
+        bg={cardIsBasket ? 'green' : 'black'}
         onClick={() => {
           changeBasketStatus(id, basket)
-          changeButtonTitle()
+          changeButtonIsBasketStatus()
         }}
       />
       {children}

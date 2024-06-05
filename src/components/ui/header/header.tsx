@@ -1,14 +1,11 @@
 'use client'
 import s from './header.module.scss'
 import { Button, Form, IconWrapper, Input, Logo } from '@/components'
-
 import Link from 'next/link'
 import { Card } from '@/app/api/cards/type'
 import { useEffect } from 'react'
-import { useAppDispatch } from '@/common/hooks'
-import { basketSlice } from '@/lib/features/basket-slice'
-import { useSelector } from 'react-redux'
-import { RootState } from '@/lib/store'
+import { useAppDispatch, useAppSelector } from '@/common/hooks'
+import { basketSlice, setBasketSelector } from '@/lib/features/basket-slice'
 
 type HeaderProps = {
   cards: Card[]
@@ -16,7 +13,7 @@ type HeaderProps = {
 
 export const Header = ({ cards }: HeaderProps) => {
   const dispatch = useAppDispatch()
-  const cardBasket = useSelector((state: RootState) => state.basket.basket)
+  const cardBasket = useAppSelector(setBasketSelector)
 
   const getBasketItemCount = () => {
     return cardBasket.filter(el => el.basket).length
@@ -28,12 +25,18 @@ export const Header = ({ cards }: HeaderProps) => {
   useEffect(() => {
     // Преобразование объекта cards в строку JSON
     const cardsJSON = JSON.stringify(cards)
-    // Сохранение строки JSON в локальном хранилище
-    localStorage.setItem('cards', cardsJSON)
 
-    // Распарс строки JSON и загрузка карточек в Redux-состояние
-    const parsedCards: Card[] = JSON.parse(cardsJSON)
-    dispatch(basketSlice.actions.fetchCards(parsedCards))
+    // Преобразование объекта cards в массив
+    const cardsParsJSON = JSON.parse(cardsJSON)
+    // Проверяю есть ли в localstorage oбъект cards если нет вернется null
+    const isCardsLocaleStorage = localStorage.getItem('cards')
+
+    // сохраняю в redux состояние карточки из localeStorage если есть или с server если нет
+    if (isCardsLocaleStorage !== null) {
+      dispatch(basketSlice.actions.fetchCards(JSON.parse(isCardsLocaleStorage)))
+    } else {
+      dispatch(basketSlice.actions.fetchCards(cardsParsJSON))
+    }
   }, [cards])
 
   return (
