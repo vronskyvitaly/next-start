@@ -1,1 +1,1 @@
-export * from './baner-section'
+export * from './banner-section'

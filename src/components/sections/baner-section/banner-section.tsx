@@ -1,6 +1,6 @@
 import { DefaultImg, Section } from '@/components'
 import s from './baner-section.module.scss'
-export const BanerSection = () => {
+export const BannerSection = () => {
   return (
     <Section className={s.root}>
       <div className={s.container}>
@@ -10,7 +10,7 @@ export const BanerSection = () => {
           height={'220px'}
           width={'100%'}
           defaultImgTitle={
-            'Здесь будет банер с часто выбираемых пользователем карточек ⚒️'
+            'There will be a banner with frequently selected cards by the user ⚒️'
           }
         />
       </div>
