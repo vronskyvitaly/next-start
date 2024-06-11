@@ -1,0 +1,61 @@
+.root {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+
+  .wrapper {
+    display: flex;
+    align-items: flex-start;
+  }
+
+  .flexImgAndTitle {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .defaulImgCard {
+    width: 92px;
+    height: 92px;
+    background-color: #333333;
+    border-radius: 4px;
+  }
+
+  .priceAndDiscount {
+    width: 100%;
+    padding-top: 6px;
+    display: flex;
+    align-items: center;
+    padding-left: 124px;
+    gap: 6px;
+
+    & .discount {
+      font-size: 14px;
+      font-family: Inter sans-serif;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 17px;
+      text-decoration-line: line-through;
+      color: rgba(0, 0, 0, 0.3);
+    }
+  }
+
+  .counterBlock {
+    padding-left: 40px;
+    max-height: 48px;
+    display: flex;
+    gap: 40px;
+    align-items: center;
+    & .btn {
+      font-size: 38px;
+      background-color: #eef7ff;
+      width: 48px;
+      height: 48px;
+      border-radius: 4px;
+    }
+  }
+}
+
+/* 1200 */
