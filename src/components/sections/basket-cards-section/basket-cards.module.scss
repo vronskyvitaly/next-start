@@ -1,0 +1,30 @@
+.root {
+  padding-top: 60px;
+
+  .flexSection {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  .basketBlock {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .infoBlock {
+    width: 406px;
+    height: 406px;
+    background-color: #333333;
+  }
+
+  .link {
+    position: absolute;
+    content: ' ';
+    top: -34px;
+    right: 0;
+    color: #013eff;
+  }
+}
