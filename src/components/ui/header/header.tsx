@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { Card } from '@/app/api/cards/type'
 import { useEffect } from 'react'
 import { useAppDispatch, useAppSelector } from '@/common/hooks'
-import { basketSlice, setBasketSelector } from '@/lib/features/basket-slice'
+import { fetchCards, setBasketSelector } from '@/lib/features/basket-slice'
 
 type HeaderProps = {
   cards: Card[]
@@ -24,20 +24,21 @@ export const Header = ({ cards }: HeaderProps) => {
    */
   useEffect(() => {
     // Преобразование объекта cards в строку JSON
-    const cardsJSON = JSON.stringify(cards)
+    const cardsStringifyJSON = JSON.stringify(cards)
 
     // Преобразование объекта cards в массив
-    const cardsParsJSON = JSON.parse(cardsJSON)
+    const cardsParsJSON = JSON.parse(cardsStringifyJSON)
+
     // Проверяю есть ли в localstorage объект cards если нет вернется null
     const isCardsLocaleStorage = localStorage.getItem('cards')
 
     // сохраняю в redux состояние карточки из localeStorage если есть или с server если нет
     if (isCardsLocaleStorage !== null) {
-      dispatch(basketSlice.actions.fetchCards(JSON.parse(isCardsLocaleStorage)))
+      dispatch(fetchCards(JSON.parse(isCardsLocaleStorage)))
     } else {
-      dispatch(basketSlice.actions.fetchCards(cardsParsJSON))
+      dispatch(fetchCards(cardsParsJSON))
     }
-  }, [cards])
+  }, [])
 
   return (
     <header className={s.root}>

@@ -5,7 +5,7 @@ import { PayloadAction } from '@reduxjs/toolkit'
 export const basketSlice = createAppSlice({
   name: 'basket',
   initialState: {
-    basket: [] as Card[] | []
+    basket: [] as Card[]
   },
   selectors: {
     setBasketSelector: sliceState => sliceState.basket
