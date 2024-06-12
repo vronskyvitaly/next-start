@@ -46,9 +46,10 @@ export const CardProduct = ({
     setCardIsBasket(prevState => !prevState)
   }
 
+  // fix
   return (
     <div className={s.root}>
-      <Link className={s.actionWrapper} href={`/card/${id}`}>
+      <Link className={s.actionWrapper} href={`/card/[id]`} as={`/card/${id}`}>
         <DefaultImg />
         <span className={s.cardBlockPrice}>
           <p className={s.price}>{price}</p>
