@@ -1,8 +1,3 @@
-{
-  "redirects": [
-    {
-      "source": "/card/:id*",
-      "destination": "/card/:id*"
-    }
-  ]
-}
+ {
+   "rewrites": [{ "source": "/(.*)", "destination": "/" }]
+ }
