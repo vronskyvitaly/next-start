@@ -26,11 +26,21 @@ export const basketSlice = createAppSlice({
             )
           }
         }
+      ),
+      deleteCard: creators.reducer(
+        (state, action: PayloadAction<{ id: string }>) => {
+          return {
+            ...state,
+            basket: state.basket.map(el =>
+              el._id === action.payload.id ? { ...el, basket: false } : el
+            )
+          }
+        }
       )
     }
   }
 })
 
-export const { fetchCards, isBasketStatus } = basketSlice.actions
+export const { fetchCards, isBasketStatus, deleteCard } = basketSlice.actions
 
 export const { setBasketSelector } = basketSlice.selectors
