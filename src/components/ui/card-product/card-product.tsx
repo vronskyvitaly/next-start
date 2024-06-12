@@ -51,8 +51,7 @@ export const CardProduct = ({
     <div className={s.root}>
       <Link
         className={s.actionWrapper}
-        href={`/card/[id]`}
-        as={`/card/${id}`}
+        href={`/card/${id}`}
         passHref
         prefetch={false}
       >
