@@ -49,7 +49,13 @@ export const CardProduct = ({
   // fix
   return (
     <div className={s.root}>
-      <Link className={s.actionWrapper} href={`/card/[id]`} as={`/card/${id}`}>
+      <Link
+        className={s.actionWrapper}
+        href={`/card/[id]`}
+        as={`/card/${id}`}
+        passHref
+        prefetch={false}
+      >
         <DefaultImg />
         <span className={s.cardBlockPrice}>
           <p className={s.price}>{price}</p>
