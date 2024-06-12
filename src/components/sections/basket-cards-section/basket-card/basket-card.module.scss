@@ -1,3 +1,5 @@
+@import '@/styles/mixins';
+
 .root {
   padding-top: 20px;
   padding-bottom: 20px;
@@ -5,18 +7,29 @@
   border-bottom: 1px solid black;
 
   .wrapper {
-    display: flex;
-    align-items: flex-start;
+    @include flex($align: flex-start);
+  }
+
+  .deleteCardBtnWrapper {
+    @include flex($align: center);
+    height: 94px;
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .deleteCardBtn {
+    @include flex($justify: center, $align: stretch);
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    cursor: pointer;
   }
 
   .flexImgAndTitle {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    gap: 12px;
+    @include flex($justify: center, $align: flex-start, $gap: 12px);
   }
 
-  .defaulImgCard {
+  .defaultImgCard {
     width: 92px;
     height: 92px;
     background-color: #333333;
@@ -57,5 +70,3 @@
     }
   }
 }
-
-/* 1200 */

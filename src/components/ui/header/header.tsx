@@ -28,7 +28,7 @@ export const Header = ({ cards }: HeaderProps) => {
 
     // Преобразование объекта cards в массив
     const cardsParsJSON = JSON.parse(cardsJSON)
-    // Проверяю есть ли в localstorage oбъект cards если нет вернется null
+    // Проверяю есть ли в localstorage объект cards если нет вернется null
     const isCardsLocaleStorage = localStorage.getItem('cards')
 
     // сохраняю в redux состояние карточки из localeStorage если есть или с server если нет

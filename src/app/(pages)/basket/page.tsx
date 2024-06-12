@@ -1,7 +1,7 @@
 import s from './page.module.scss'
-import { BasketCards } from '@/components/sections/basket-cards-section/basket-cards'
 import { Typography } from '@/components/ui/typography/typography'
 import { TypographyVariant } from '@/common/enums'
+import { BasketCards } from '@/components/sections/basket-cards-section'
 
 export default function BasketPage() {
   return (

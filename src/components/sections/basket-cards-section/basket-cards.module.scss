@@ -1,10 +1,10 @@
+@import '@/styles/mixins';
+
 .root {
-  padding-top: 60px;
+  padding-top: 96px;
 
   .flexSection {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
+    @include flex($justify: space-between, $align: flex-start, $wrap: nowrap);
   }
 
   .basketBlock {
@@ -12,19 +12,19 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
+
+    & .link {
+      position: absolute;
+      content: ' ';
+      top: -34px;
+      right: 0;
+      color: #013eff;
+    }
   }
 
   .infoBlock {
     width: 406px;
     height: 406px;
     background-color: #333333;
-  }
-
-  .link {
-    position: absolute;
-    content: ' ';
-    top: -34px;
-    right: 0;
-    color: #013eff;
   }
 }

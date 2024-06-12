@@ -14,6 +14,7 @@
     "chromatic": "npx chromatic --project-token=chpt_d300eb40a3ef288"
   },
   "dependencies": {
+    "@react-icons/all-files": "^4.1.0",
     "@reduxjs/toolkit": "^2.2.5",
     "axios": "^1.7.2",
     "bcrypt": "^5.1.1",
