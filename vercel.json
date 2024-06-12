@@ -2,7 +2,7 @@
   "redirects": [
     {
       "source": "/card/:id*",
-      "destination": "/card/:id*"
+      "destination": "/card/:path*"
     }
   ]
 }
