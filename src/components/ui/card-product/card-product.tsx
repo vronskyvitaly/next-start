@@ -5,7 +5,7 @@ import { DefaultImg } from '../default-img'
 import { Button } from '../button'
 import Link from 'next/link'
 import { useAppDispatch, useAppSelector } from '@/common/hooks'
-import { basketSlice, setBasketSelector } from '@/lib/features/basket-slice'
+import { isBasketStatus, setBasketSelector } from '@/lib/features/basket-slice'
 
 type Props = {
   children?: React.ReactNode
@@ -24,22 +24,22 @@ export const CardProduct = ({
   basket
 }: Props) => {
   const dispatch = useAppDispatch()
-  const cardsSl = useAppSelector(setBasketSelector)
+  const cards = useAppSelector(setBasketSelector)
   const [cardIsBasket, setCardIsBasket] = useState<boolean>(basket)
 
   const changeBasketStatus = (id: string, status: boolean) => {
     // Возвращаю новый массив с объновленными данными
-    const newCardsData = cardsSl.map(el =>
+    const newCardsData = cards.map(el =>
       el._id === id ? { ...el, basket: !status } : el
     )
     // Изменение статуса свойства basket на противоположное!
-    dispatch(basketSlice.actions.isBasketStatus({ id, status: !status }))
+    dispatch(isBasketStatus({ id, status: !status }))
 
     // Преобразование массив в формат JSON
-    const newCardsDataJSON = JSON.stringify(newCardsData)
+    const cardsStringify = JSON.stringify(newCardsData)
 
     // Сохраненяю данные в localStorage
-    localStorage.setItem('cards', newCardsDataJSON)
+    localStorage.setItem('cards', cardsStringify)
   }
 
   const changeButtonIsBasketStatus = () => {
@@ -48,7 +48,7 @@ export const CardProduct = ({
 
   return (
     <div className={s.root}>
-      <Link target={'_blank'} className={s.actionWrapper} href={`/card/${id}`}>
+      <Link className={s.actionWrapper} href={`/card/${id}`}>
         <DefaultImg />
         <span className={s.cardBlockPrice}>
           <p className={s.price}>{price}</p>
