@@ -24,10 +24,11 @@ export const Header = ({ cards }: HeaderProps) => {
    */
   useEffect(() => {
     // Преобразование объекта cards в строку JSON
-    const cardsJSON = JSON.stringify(cards)
+    const cardsStringifyJSON = JSON.stringify(cards)
 
     // Преобразование объекта cards в массив
-    const cardsParsJSON = JSON.parse(cardsJSON)
+    const cardsParsJSON = JSON.parse(cardsStringifyJSON)
+
     // Проверяю есть ли в localstorage объект cards если нет вернется null
     const isCardsLocaleStorage = localStorage.getItem('cards')
 
