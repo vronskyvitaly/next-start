@@ -46,6 +46,7 @@ export const CardProduct = ({
     setCardIsBasket(prevState => !prevState)
   }
 
+  // fix
   return (
     <div className={s.root}>
       <Link className={s.actionWrapper} href={`/card/[id]`} as={`/card/${id}`}>
