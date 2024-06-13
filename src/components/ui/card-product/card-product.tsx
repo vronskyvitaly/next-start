@@ -55,7 +55,7 @@ export const CardProduct = ({
   // fix
   return (
     <div className={s.root}>
-      <Link href={`/card/${id}`} className={s.actionWrapper} legacyBehavior>
+      <Link href={`/card/${id}`} className={s.actionWrapper} passHref>
         <DefaultImg />
         <span className={s.cardBlockPrice}>
           <p className={s.price}>{price}</p>
