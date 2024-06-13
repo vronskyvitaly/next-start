@@ -38,7 +38,7 @@ export const BasketCards = () => {
     }
   }, [])
 
-  // Remove a card from the basket by clicking on the default icon
+  // Remove a [card] from the basket by clicking on the default icon
   function removalFromCart(id: string) {
     // Удаляем из локального state
     setLocalCards(prevState => prevState.filter(c => c._id !== id))
