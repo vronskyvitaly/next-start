@@ -55,7 +55,10 @@ export const CardProduct = ({
   // fix
   return (
     <div className={s.root}>
-      <Link href={`/card/${id}`} className={s.actionWrapper} passHref>
+      <Link
+        href={{ pathname: `/card/[id]`, query: { id: id } }}
+        as={`/card/[id]`}
+      >
         <DefaultImg />
         <span className={s.cardBlockPrice}>
           <p className={s.price}>{price}</p>
