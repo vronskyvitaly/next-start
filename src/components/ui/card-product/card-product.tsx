@@ -49,7 +49,7 @@ export const CardProduct = ({
   }
 
   function handleClick() {
-    router.push(`/card/${id}`)
+    router.prefetch(`/card/${id}`)
   }
 
   // fix
