@@ -2,5 +2,9 @@
    "rewrites": [{ "source": "/(.*)", "destination": "/" }, { "source": "/card/:id", "destination": "/card/" }],
    "framework": "nextjs",
    "cleanUrls": true,
-   "devCommand": "next dev"
- }
+   "devCommand": "next dev",
+   "functions": {
+     "card/[page].tsx": {
+       "memory": 1024
+     }}
+   }
