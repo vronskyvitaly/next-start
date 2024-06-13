@@ -1,5 +1,5 @@
  {
-   "rewrites": [{ "source": "/(.*)", "destination": "/" }, { "source": "/card/:path*", "destination": "/card/:path*" }],
+   "rewrites": [{ "source": "/(.*)", "destination": "/" }, { "source": "/card/:{id}*", "destination": "/card/:path*" }],
    "framework": "nextjs",
    "cleanUrls": true,
    "devCommand": "next dev",
