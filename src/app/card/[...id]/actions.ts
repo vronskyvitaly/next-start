@@ -3,7 +3,8 @@
  */
 export async function fetchCard(id: string) {
   const res = await fetch(`${process.env.NEXTAUTH_URL}/api/cards/${id}`, {
-    method: 'GET'
+    method: 'GET',
+    cache: 'no-cache'
   })
   return await res.json()
 }
