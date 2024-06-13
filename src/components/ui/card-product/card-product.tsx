@@ -48,7 +48,11 @@ export const CardProduct = ({
 
   return (
     <div className={s.root}>
-      <Link href={`/card?key=${id}`} className={s.actionWrapper}>
+      <Link
+        target={'_blank'}
+        href={`/card?key=${id}`}
+        className={s.actionWrapper}
+      >
         <DefaultImg />
         <span className={s.cardBlockPrice}>
           <p className={s.price}>{price}</p>
