@@ -6,7 +6,6 @@ import { Button } from '../button'
 import Link from 'next/link'
 import { useAppDispatch, useAppSelector } from '@/common/hooks'
 import { isBasketStatus, setBasketSelector } from '@/lib/features/basket-slice'
-import { useRouter } from 'next/navigation'
 
 type Props = {
   children?: React.ReactNode
@@ -27,7 +26,6 @@ export const CardProduct = ({
   const dispatch = useAppDispatch()
   const cards = useAppSelector(setBasketSelector)
   const [cardIsBasket, setCardIsBasket] = useState<boolean>(basket)
-  const router = useRouter()
 
   const changeBasketStatus = (id: string, status: boolean) => {
     // Возвращаю новый массив с объновленными данными
@@ -48,21 +46,16 @@ export const CardProduct = ({
     setCardIsBasket(prevState => !prevState)
   }
 
-  function handleClick() {
-    router.push(`/card/${id}`)
-  }
-
-  // fix
   return (
     <div className={s.root}>
-      <div className={s.actionWrapper} onClick={handleClick}>
+      <Link href={'/card'} className={s.actionWrapper}>
         <DefaultImg />
         <span className={s.cardBlockPrice}>
           <p className={s.price}>{price}</p>
           <span className={s.discount}>{discount + price}</span>
         </span>
         <p className={s.title}>{title}</p>
-      </div>
+      </Link>
 
       <Button
         title={cardIsBasket ? 'B корзине' : 'В корзину'}
