@@ -27,7 +27,6 @@ export const CardProduct = ({
   const dispatch = useAppDispatch()
   const cards = useAppSelector(setBasketSelector)
   const [cardIsBasket, setCardIsBasket] = useState<boolean>(basket)
-  const router = useRouter()
 
   const changeBasketStatus = (id: string, status: boolean) => {
     // Возвращаю новый массив с объновленными данными
@@ -48,14 +47,10 @@ export const CardProduct = ({
     setCardIsBasket(prevState => !prevState)
   }
 
-  function handleClick() {
-    router.push(`/card/${id}`)
-  }
-
   // fix
   return (
     <div className={s.root}>
-      <Link href={`/card/${id}`} className={s.actionWrapper} passHref>
+      <Link href={`/card/${id}`} className={s.actionWrapper}>
         <DefaultImg />
         <span className={s.cardBlockPrice}>
           <p className={s.price}>{price}</p>
