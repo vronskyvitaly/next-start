@@ -1,9 +1,9 @@
  {
-   "rewrites": [{ "source": "/(.*)", "destination": "/" }, { "source": "/card/:path*", "destination": "/card/:path*" }],
+   "rewrites": [{ "source": "/(.*)", "destination": "/",  }, { "source": "/card/:path*", "destination": "/card/:path*" }],
    "framework": "nextjs",
    "cleanUrls": true,
    "devCommand": "next dev",
    "installCommand": "npm install",
-   "public": true
+   "public": false
 
  }
