@@ -1,6 +1,6 @@
 'use client'
 import s from './card-product.module.scss'
-import React, { useState } from 'react'
+import React, { MouseEvent, useState } from 'react'
 import { DefaultImg } from '../default-img'
 import { Button } from '../button'
 import Link from 'next/link'
@@ -48,14 +48,15 @@ export const CardProduct = ({
     setCardIsBasket(prevState => !prevState)
   }
 
-  function handleClick() {
+  function handleClick(e: MouseEvent<HTMLButtonElement>) {
+    e.preventDefault()
     router.push(`/card/${id}`)
   }
 
   // fix
   return (
     <div className={s.root}>
-      <div className={s.actionWrapper} onClick={handleClick}>
+      <div className={s.actionWrapper} onClick={() => handleClick}>
         <DefaultImg />
         <span className={s.cardBlockPrice}>
           <p className={s.price}>{price}</p>
