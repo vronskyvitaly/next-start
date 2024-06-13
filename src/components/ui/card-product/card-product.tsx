@@ -49,8 +49,7 @@ export const CardProduct = ({
   }
 
   function handleClick(e: MouseEvent<HTMLButtonElement>) {
-    e.preventDefault()
-    router.push(`/card/${id}`)
+    router.replace(`/card/${id}`)
   }
 
   // fix
