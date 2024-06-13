@@ -2,6 +2,6 @@
    "rewrites": [{ "source": "/(.*)", "destination": "/" }, { "source": "/card/:path*", "destination": "/card/:path*" }],
    "framework": "nextjs",
    "cleanUrls": true,
-   "devCommand": "next dev",
+   "devCommand": "next dev"
 
  }
