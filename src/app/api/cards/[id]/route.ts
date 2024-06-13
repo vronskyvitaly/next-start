@@ -9,12 +9,12 @@ export const GET = async (
   try {
     await connectToDB()
 
-    // Receiving a [card] from the server by id
+    // Receiving a card from the server by id
     const card = await Card.findById(params.id)
 
     return NextResponse.json(card)
   } catch (error) {
-    console.error('Error fetch [card]:', error)
+    console.error('Error fetch card:', error)
     return NextResponse.json(
       { error: 'Internal Server Error' },
       { status: 500 }
