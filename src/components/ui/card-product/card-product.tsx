@@ -49,7 +49,7 @@ export const CardProduct = ({
   }
 
   function handleClick() {
-    router.replace(`/card/${id}`)
+    router.push(`/card/${id}`)
   }
 
   // fix
