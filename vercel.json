@@ -1,10 +1,7 @@
  {
-   "rewrites": [{ "source": "/(.*)", "destination": "/" }, { "source": "/card/:id", "destination": "/card/" }],
+   "rewrites": [{ "source": "/(.*)", "destination": "/" }, { "source": "/card/:path*", "destination": "/card/:path*" }],
    "framework": "nextjs",
    "cleanUrls": true,
    "devCommand": "next dev",
-   "functions": {
-     "card/[page].tsx": {
-       "memory": 1024
-     }}
-   }
+
+ }
