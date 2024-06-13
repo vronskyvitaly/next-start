@@ -1,5 +1,5 @@
  {
-   "rewrites": [ { "source": "/card/:id", "destination": "./src/app/card/[id]/page.tsx" }],
+   "rewrites": [ { "source": "/card/:id", "destination": "/app/card/[id]" }],
    "framework": "nextjs",
    "cleanUrls": true,
    "devCommand": "next dev",
