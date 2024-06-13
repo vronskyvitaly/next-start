@@ -76,7 +76,7 @@ export const Header = ({ cards }: HeaderProps) => {
               <Link href={'/basket'} className={s.link}>
                 <IconWrapper
                   counter={getBasketItemCount()}
-                  subTitle={'Корзина6'}
+                  subTitle={'Корзина7'}
                   srcImg={
                     'https://static.vecteezy.com/system/resources/thumbnails/004/798/846/small/shopping-cart-logo-or-icon-design-vector.jpg'
                   }
