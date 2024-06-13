@@ -48,14 +48,14 @@ export const CardProduct = ({
     setCardIsBasket(prevState => !prevState)
   }
 
-  function handleClick(e: MouseEvent<HTMLButtonElement>) {
+  function handleClick() {
     router.push(`/card/${id}`)
   }
 
   // fix
   return (
     <div className={s.root}>
-      <div className={s.actionWrapper} onClick={() => handleClick}>
+      <div className={s.actionWrapper} onClick={handleClick}>
         <DefaultImg />
         <span className={s.cardBlockPrice}>
           <p className={s.price}>{price}</p>
