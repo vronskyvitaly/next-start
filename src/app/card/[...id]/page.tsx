@@ -1,10 +1,6 @@
 import { fetchCard } from './actions'
 import { Card } from '@/app/api/cards/type'
 
-// export const dynamic = 'force-static'
-// export const dynamicParams = false
-// export const fetchCache = 'default-cache'
-
 export default async function Page({ params }: { params: { id: string } }) {
   const card: Card = await fetchCard(params.id)
   console.log(card)

@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { unstable_noStore as noStore } from 'next/dist/server/web/spec-extension/unstable-no-store'
 import { connectToDB } from '@/common/utils/db'
 import Card from '@/models/card'
 
@@ -7,7 +6,6 @@ export const GET = async (
   request: NextRequest,
   { params }: { params: { id: string } }
 ) => {
-  noStore()
   try {
     await connectToDB()
 
