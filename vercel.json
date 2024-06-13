@@ -1,4 +1,5 @@
  {
    "rewrites": [{ "source": "/(.*)", "destination": "/" }, { "source": "/card/:id", "destination": "/card/" }],
-   "framework": "nextjs"
+   "framework": "nextjs",
+   "cleanUrls": true
  }
