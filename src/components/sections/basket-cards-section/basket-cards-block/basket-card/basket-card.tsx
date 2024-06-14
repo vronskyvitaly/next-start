@@ -1,20 +1,22 @@
-import { Card } from '@/app/api/cards/type'
+import { Card } from '@app/api/cards/type'
 import s from './basket-card.module.scss'
-import { Typography } from '@/components/ui/typography/typography'
-import { TypographyVariant } from '@/common/enums'
-import { useState } from 'react'
+import { Typography } from '@components/ui/typography/typography'
+import { TypographyVariant } from '@common/enums'
+import React, { useState } from 'react'
 import { AiFillDelete } from '@react-icons/all-files/ai/AiFillDelete'
 
 type Props = {
+  children: React.ReactNode
+  key: string
   card: Card
   checkboxPageState: boolean
   removalFromCart: (id: string) => void
 }
-export const BasketCard = ({ card, removalFromCart }: Props) => {
+export const BasketCard = ({ card, removalFromCart, key, children }: Props) => {
   const [count, setCount] = useState(0)
 
   return (
-    <div key={card._id} className={s.root}>
+    <div key={key} className={s.root}>
       <div className={s.wrapper}>
         <div className={s.deleteCardBtnWrapper}>
           <div
@@ -50,6 +52,7 @@ export const BasketCard = ({ card, removalFromCart }: Props) => {
           </button>
         </div>
       </div>
+      {children}
     </div>
   )
 }

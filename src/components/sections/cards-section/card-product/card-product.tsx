@@ -1,10 +1,10 @@
 'use client'
 import s from './card-product.module.scss'
 import React, { useState } from 'react'
-import { DefaultImg } from '../default-img'
-import { Button } from '../button'
+import { DefaultImg } from '../../../ui/default-img'
+import { Button } from '../../../ui/button'
 import Link from 'next/link'
-import { useAppDispatch, useAppSelector } from '@/common/hooks'
+import { useAppDispatch, useAppSelector } from '@common/hooks'
 import { isBasketStatus, setBasketSelector } from '@/lib/features/basket-slice'
 
 type Props = {

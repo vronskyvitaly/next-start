@@ -1,7 +1,7 @@
 import s from './card-price.module.scss'
-import { Button } from '../../../ui/button/button'
-import { Typography } from '../../../ui/typography/typography'
-import { TypographyVariant } from '../../../../common/enums/enums'
+import { Button } from '@componentsUI/button'
+import { Typography } from '@componentsUI/typography'
+import { TypographyVariant } from '@enum/*'
 import cn from 'classnames'
 
 export const CardPrice = () => {

@@ -1,6 +1,7 @@
-import { Typography } from '../typography/typography'
-import { TypographyVariant } from '../../../common/enums/enums'
+import { Typography } from '@componentsUI/typography'
+import { TypographyVariant } from '@enum/*'
 import s from './icon-wrapper.module.scss'
+import React from 'react'
 
 type Props = {
   subTitle?: string

@@ -1,18 +1,17 @@
 'use client'
 
-import s from './basket-cards.module.scss'
-import { useAppDispatch, useAppSelector } from '@/common/hooks'
+import s from './basket-cards-block.module.scss'
+import { useAppDispatch, useAppSelector } from '@common/hooks'
 import {
   deleteCard,
   fetchCards,
   setBasketSelector
 } from '@/lib/features/basket-slice'
 import { useEffect, useState } from 'react'
-import { Card } from '@/app/api/cards/type'
-import { BasketCard } from '@/components/sections/basket-cards-section/basket-card'
-import { CardPrice } from '@/components/sections/basket-cards-section/card-price'
+import { Card } from '@app/api/cards/type'
+import { BasketCard } from '@components/sections/basket-cards-section/basket-cards-block/basket-card'
 
-export const BasketCards = () => {
+export const BasketCardsBlock = () => {
   const dispatch = useAppDispatch()
 
   // Получаю карточки добавленные в корзину из Redux
@@ -72,26 +71,19 @@ export const BasketCards = () => {
       localCards
         .filter(el => el.basket)
         .map(card => (
-          <div key={card._id}>
-            <BasketCard
-              card={card}
-              checkboxPageState={checkboxPageState}
-              removalFromCart={removalFromCart}
-            />
+          <BasketCard
+            key={card._id}
+            card={card}
+            checkboxPageState={checkboxPageState}
+            removalFromCart={removalFromCart}
+          >
             <p className={s.link}>Поделиться</p>
-          </div>
+          </BasketCard>
         ))
     ) : (
       <h3>No cards</h3>
     )
   }
 
-  return (
-    <section className={s.root}>
-      <div className={s.flexSection}>
-        <div className={s.basketBlock}>{renderBasketCards()}</div>
-        <CardPrice />
-      </div>
-    </section>
-  )
+  return <div className={s.basketCardsBlock}>{renderBasketCards()}</div>
 }

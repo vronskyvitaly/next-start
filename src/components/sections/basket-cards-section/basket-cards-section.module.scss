@@ -1,0 +1,9 @@
+@import '../../../styles/mixins';
+
+.root {
+  padding-top: 96px;
+
+  .flexSection {
+    @include flex($justify: space-between, $align: flex-start, $wrap: nowrap);
+  }
+}

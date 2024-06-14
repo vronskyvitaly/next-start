@@ -1,5 +1,5 @@
-import { CardSection } from '@/components/sections/card-section/card-section'
-import { fetchCards } from '@/components/sections/cards-section/actions'
+import { CardSection } from '@components/sections/card-section/card-section'
+import { fetchCards } from '@components/sections/cards-section/actions'
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
