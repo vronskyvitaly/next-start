@@ -1,0 +1,55 @@
+@import '../../../../styles/mixins';
+
+.cardPrice {
+  margin: -30px 0;
+  @include flex($direction: column, $gap: 20px);
+  width: 406px;
+  background: var(--color-light-100);
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 4px;
+  padding: 40px;
+
+  & .line {
+    background-color: black;
+    height: 1px;
+    color: rgb(0, 0, 0, 30%);
+    width: 100%;
+    border: none;
+  }
+
+  & .productAndDiscountBlock {
+    width: 100%;
+    @include flex($direction: column, $gap: 20px);
+
+    & .row {
+      @include flex($direction: row, $justify: space-between);
+    }
+
+    & .productRow {
+      position: relative;
+      & .product {
+      }
+      & .countProducts {
+        position: absolute;
+        left: 52px;
+        top: 0;
+        right: 0;
+      }
+    }
+
+    & .discountRow {
+      & .discount {
+        color: var(--color-danger-500);
+      }
+    }
+  }
+
+  & .totalAmountBlock {
+    width: 100%;
+    @include flex($direction: row, $justify: space-between, $align: center);
+
+    & .totalAmount {
+      color: var(--color-success-500);
+    }
+  }
+}
