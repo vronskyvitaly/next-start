@@ -1,0 +1,10 @@
+@import '@/styles/mixins';
+
+.root {
+  h3 {
+    padding-top: 60px;
+  }
+  & .container {
+    @include container;
+  }
+}
