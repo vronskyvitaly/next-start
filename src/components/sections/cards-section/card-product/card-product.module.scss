@@ -1,25 +1,24 @@
+@import '@styles/*';
+
 .root {
+  @include flex($direction: column, $justify: flex-start, $gap: 12px);
   padding: 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
   background-color: #e3e3e3;
   width: 100%;
   max-width: 270px;
   border-radius: 4px;
 
   & .actionWrapper {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
+    @include flex($direction: column, $gap: 12px);
     color: inherit;
 
     & .cardBlockPrice {
-      display: flex;
-      justify-content: flex-start;
-      align-items: flex-end;
-      gap: 4px;
-
+      @include flex(
+        $direction: row,
+        $justify: flex-start,
+        $align: flex-end,
+        $gap: 4px
+      );
       & .price {
         font-weight: bold;
         font-size: 14px;

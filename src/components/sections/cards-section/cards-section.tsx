@@ -1,10 +1,11 @@
 'use client'
 
 import s from './cards.section.module.scss'
-import { CardProduct, Section } from '@/components'
+import { Section } from '@/components'
 import React, { CSSProperties } from 'react'
 import { useSelector } from 'react-redux'
 import { setBasketSelector } from '@/lib/features/basket-slice'
+import { CardProduct } from '@components/sections/cards-section/card-product'
 
 type Props = {
   style?: CSSProperties

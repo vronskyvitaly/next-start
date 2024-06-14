@@ -1,7 +1,7 @@
 import s from './page.module.scss'
 import { Typography } from '@/components/ui/typography/typography'
 import { TypographyVariant } from '@/common/enums'
-import { BasketCards } from '@/components/sections/basket-cards-section'
+import { BasketCardsSection } from '@components/sections/basket-cards-section'
 
 export default function BasketPage() {
   return (
@@ -10,7 +10,7 @@ export default function BasketPage() {
         <Typography variant={TypographyVariant.H3} as={'h3'}>
           Корзина
         </Typography>
-        <BasketCards />
+        <BasketCardsSection />
       </div>
     </article>
   )

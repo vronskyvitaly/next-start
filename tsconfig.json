@@ -23,8 +23,11 @@
       "@styles/*": ["./src/styles/mixins.scss"],
       "@components/*": ["./src/components/*"],
       "@common/*": ["./src/common/*"],
+      "@enum/*": ["./src/common/enums/enums"],
       "@features/*": ["./src/features/*"],
+      "@componentsUI/*": ["./src/components/ui/*"],
     },
+    "baseUrl": "."
 
 
 
