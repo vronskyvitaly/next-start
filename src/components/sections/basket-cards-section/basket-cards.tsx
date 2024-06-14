@@ -10,6 +10,7 @@ import {
 import { useEffect, useState } from 'react'
 import { Card } from '@/app/api/cards/type'
 import { BasketCard } from '@/components/sections/basket-cards-section/basket-card'
+import { CardPrice } from '@/components/sections/basket-cards-section/card-price'
 
 export const BasketCards = () => {
   const dispatch = useAppDispatch()
@@ -89,7 +90,7 @@ export const BasketCards = () => {
     <section className={s.root}>
       <div className={s.flexSection}>
         <div className={s.basketBlock}>{renderBasketCards()}</div>
-        <div className={s.infoBlock}></div>
+        <CardPrice />
       </div>
     </section>
   )
