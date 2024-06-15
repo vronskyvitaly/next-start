@@ -5,7 +5,10 @@ import Link from 'next/link'
 import { Card } from '@/app/api/cards/type'
 import { useEffect } from 'react'
 import { useAppDispatch, useAppSelector } from '@/common/hooks'
-import { fetchCards, setBasketSelector } from '@/lib/features/basket-slice'
+import {
+  fetchCards,
+  setCountCardInBasketSelector
+} from '@/lib/features/basket-slice'
 
 type HeaderProps = {
   cards: Card[]
@@ -13,11 +16,7 @@ type HeaderProps = {
 
 export const Header = ({ cards }: HeaderProps) => {
   const dispatch = useAppDispatch()
-  const cardBasket = useAppSelector(setBasketSelector)
-
-  const getBasketItemCount = () => {
-    return cardBasket.filter(el => el.basket).length
-  }
+  const countCardInBasket = useAppSelector(setCountCardInBasketSelector)
 
   /***
    * Saving cards to localStorage
@@ -75,7 +74,7 @@ export const Header = ({ cards }: HeaderProps) => {
             <div>
               <Link href={'/basket'} className={s.link}>
                 <IconWrapper
-                  counter={getBasketItemCount()}
+                  counter={countCardInBasket}
                   subTitle={'Корзина'}
                   srcImg={
                     'https://static.vecteezy.com/system/resources/thumbnails/004/798/846/small/shopping-cart-logo-or-icon-design-vector.jpg'
