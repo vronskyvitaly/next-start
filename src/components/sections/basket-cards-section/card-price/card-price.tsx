@@ -4,10 +4,47 @@ import { Typography } from '@componentsUI/typography'
 import { TypographyVariant } from '@enum/*'
 import cn from 'classnames'
 import { useAppSelector } from '@common/hooks'
-import { setCountCardInBasketSelector } from '@/lib/features/basket-slice'
+import {
+  setBasketSelector,
+  setCountCardInBasketSelector
+} from '@/lib/features/basket-slice'
+import { Card } from '@app/api/cards/type'
+
+interface ICardCalculator {
+  cards: Card[]
+  totalSumWithOutDiscount: () => number
+  totalDiscount: () => number
+  totalSum: () => number
+}
 
 export const CardPrice = () => {
   const countCardInBasket = useAppSelector(setCountCardInBasketSelector)
+  const cards = useAppSelector(setBasketSelector)
+
+  function CardCalculator<T extends ICardCalculator>(
+    this: T,
+    cards: Card[]
+  ): void {
+    this.cards = cards.filter(c => c.basket)
+
+    this.totalSumWithOutDiscount = function () {
+      return this.cards.reduce((sum: number, card: Card) => sum + card.price, 0)
+    }
+
+    this.totalDiscount = function () {
+      return this.cards.reduce(
+        (sum: number, card: Card) => sum + (card.discount || 0),
+        0
+      )
+    }
+
+    this.totalSum = function () {
+      return this.totalSumWithOutDiscount() + this.totalDiscount()
+    }
+  }
+
+  const cardsFunctionality = new (CardCalculator as any)(cards)
+
   return (
     <div className={s.cardPrice}>
       <Button title={'Перейти к оформлению'} widthMax={true} />
@@ -26,7 +63,12 @@ export const CardPrice = () => {
           <Typography variant={TypographyVariant.P} className={s.countProducts}>
             ({countCardInBasket})
           </Typography>
-          <Typography variant={TypographyVariant.PriseV3}>5000</Typography>
+          <Typography
+            variant={TypographyVariant.PriseV3}
+            className={s.sumProduct}
+          >
+            {cardsFunctionality.totalSum()}
+          </Typography>
         </div>
         <div className={cn(s.discountRow, s.row)}>
           <Typography variant={TypographyVariant.P}>Скидка</Typography>
@@ -34,7 +76,7 @@ export const CardPrice = () => {
             variant={TypographyVariant.PriseV3}
             className={s.discount}
           >
-            -2500
+            -{cardsFunctionality.totalDiscount()}
           </Typography>
         </div>
       </div>
@@ -48,7 +90,7 @@ export const CardPrice = () => {
           as={'h4'}
           className={s.totalAmount}
         >
-          2500
+          {cardsFunctionality.totalSumWithOutDiscount()}
         </Typography>
       </div>
     </div>
