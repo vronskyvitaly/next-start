@@ -3,8 +3,11 @@ import { Button } from '@componentsUI/button'
 import { Typography } from '@componentsUI/typography'
 import { TypographyVariant } from '@enum/*'
 import cn from 'classnames'
+import { useAppSelector } from '@common/hooks'
+import { setCountCardInBasketSelector } from '@/lib/features/basket-slice'
 
 export const CardPrice = () => {
+  const countCardInBasket = useAppSelector(setCountCardInBasketSelector)
   return (
     <div className={s.cardPrice}>
       <Button title={'Перейти к оформлению'} widthMax={true} />
@@ -21,7 +24,7 @@ export const CardPrice = () => {
             Tовары
           </Typography>
           <Typography variant={TypographyVariant.P} className={s.countProducts}>
-            (2)
+            ({countCardInBasket})
           </Typography>
           <Typography variant={TypographyVariant.PriseV3}>5000</Typography>
         </div>

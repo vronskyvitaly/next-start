@@ -8,7 +8,9 @@ export const basketSlice = createAppSlice({
     basket: [] as Card[]
   },
   selectors: {
-    setBasketSelector: sliceState => sliceState.basket
+    setBasketSelector: sliceState => sliceState.basket,
+    setCountCardInBasketSelector: sliceState =>
+      sliceState.basket.filter(c => c.basket).length
   },
   reducers: creators => {
     return {
@@ -43,4 +45,5 @@ export const basketSlice = createAppSlice({
 
 export const { fetchCards, isBasketStatus, deleteCard } = basketSlice.actions
 
-export const { setBasketSelector } = basketSlice.selectors
+export const { setBasketSelector, setCountCardInBasketSelector } =
+  basketSlice.selectors
