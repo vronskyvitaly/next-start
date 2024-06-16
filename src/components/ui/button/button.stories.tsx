@@ -110,3 +110,18 @@ export const TransparentButton: Story = {
     )
   }
 }
+
+export const DefaultCounterButton: Story = {
+  args: {
+    title: '-',
+    bg: 'counter'
+  }
+}
+
+export const DisabledCounterButton: Story = {
+  args: {
+    disabled: true,
+    title: '-',
+    bg: 'counter'
+  }
+}
