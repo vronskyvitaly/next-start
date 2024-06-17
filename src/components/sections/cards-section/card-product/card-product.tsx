@@ -5,7 +5,12 @@ import { DefaultImg } from '../../../ui/default-img'
 import { Button } from '../../../ui/button'
 import Link from 'next/link'
 import { useAppDispatch, useAppSelector } from '@common/hooks'
-import { isBasketStatus, setBasketSelector } from '@/lib/features/basket-slice'
+import {
+  fetchCards,
+  isBasketStatus,
+  setBasketSelector
+} from '@/lib/features/basket-slice'
+import { useLocalStorage } from '@uidotdev/usehooks'
 
 type Props = {
   children?: React.ReactNode
@@ -26,20 +31,38 @@ export const CardProduct = ({
   const dispatch = useAppDispatch()
   const cards = useAppSelector(setBasketSelector)
   const [cardIsBasket, setCardIsBasket] = useState<boolean>(basket)
+  const [drawing, saveDrawing] = useLocalStorage('cards', cards)
 
   const changeBasketStatus = (id: string, status: boolean) => {
     // Возвращаю новый массив с объновленными данными
-    const newCardsData = cards.map(el =>
+    const newCardsData = drawing.map(el =>
       el._id === id ? { ...el, basket: !status } : el
     )
-    // Изменение статуса свойства basket на противоположное!
+
+    let newCardsData1
+
+    if (status) {
+      newCardsData1 = newCardsData.map(el =>
+        el._id === id ? { ...el, counter: 0 } : el
+      )
+    } else {
+      newCardsData1 = newCardsData.map(el =>
+        el._id === id ? { ...el, counter: 1 } : el
+      )
+    }
+
+    // Изменение статуса свойства basket в Redux на противоположное!
     dispatch(isBasketStatus({ id, status: !status }))
 
-    // Преобразование массив в формат JSON
-    const cardsStringify = JSON.stringify(newCardsData)
+    // if (status) {
+    //   dispatch(fetchCards(newCardsData))
+    //   newCardsData.map(c => (c._id == id ? { ...c, counter: 1 } : c))
+    // } else {
+    //   dispatch(fetchCards(newCardsData))
+    //   newCardsData.map(c => (c._id == id ? { ...c, counter: 2 } : c))
+    // }
 
-    // Сохраненяю данные в localStorage
-    localStorage.setItem('cards', cardsStringify)
+    saveDrawing(newCardsData1)
   }
 
   const changeButtonIsBasketStatus = () => {

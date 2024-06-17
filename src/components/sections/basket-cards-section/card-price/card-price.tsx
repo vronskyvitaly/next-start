@@ -28,14 +28,19 @@ export const CardPrice = () => {
     this.cards = cards.filter(c => c.basket)
 
     this.totalSumWithOutDiscount = function () {
-      return this.cards.reduce((sum: number, card: Card) => sum + card.price, 0)
+      return this.cards.reduce((sum: number, card: Card) => {
+        return card.totalCardPrise === 0
+          ? sum + card.price
+          : sum + card.totalCardPrise
+      }, 0)
     }
 
     this.totalDiscount = function () {
-      return this.cards.reduce(
-        (sum: number, card: Card) => sum + (card.discount || 0),
-        0
-      )
+      return this.cards.reduce((sum: number, card: Card) => {
+        return card.totalCardDiscount === 0
+          ? sum + (card.discount || 0)
+          : sum + (card.totalCardDiscount || 0)
+      }, 0)
     }
 
     this.totalSum = function () {
