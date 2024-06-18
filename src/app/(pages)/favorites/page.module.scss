@@ -1,0 +1,16 @@
+@import '@/styles/mixins';
+
+.root {
+  padding-bottom: 60px;
+
+  & h3 {
+    padding-top: 60px;
+  }
+  .container {
+    @include container;
+  }
+
+  .flexPage {
+    //@include flex($justify: center, $align: center, $gap: 15px, $wrap: nowrap);
+  }
+}
