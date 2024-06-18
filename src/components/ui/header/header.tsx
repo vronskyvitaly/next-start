@@ -9,6 +9,7 @@ import {
   fetchCards,
   setBasketCounterSelector
 } from '@/lib/features/basket-slice'
+import { useLocalStorage } from '@uidotdev/usehooks'
 
 type HeaderProps = {
   cards: Card[]
@@ -17,26 +18,12 @@ type HeaderProps = {
 export const Header = ({ cards }: HeaderProps) => {
   const dispatch = useAppDispatch()
   const countCardInBasket = useAppSelector(setBasketCounterSelector)
+  const [drawing, saveDrawing] = useLocalStorage('cards', cards)
 
-  /***
-   * Saving cards to localStorage
-   */
   useEffect(() => {
-    // Преобразование объекта cards в строку JSON
-    const cardsStringifyJSON = JSON.stringify(cards)
-
-    // Преобразование объекта cards в массив
-    const cardsParsJSON = JSON.parse(cardsStringifyJSON)
-
-    // Проверяю есть ли в localstorage объект cards если нет вернется null
-    const isCardsLocaleStorage = localStorage.getItem('cards')
-
-    // сохраняю в redux состояние карточки из localeStorage если есть или с server если нет
-    if (isCardsLocaleStorage !== null) {
-      dispatch(fetchCards(JSON.parse(isCardsLocaleStorage)))
-    } else {
-      dispatch(fetchCards(cardsParsJSON))
-    }
+    drawing !== null
+      ? dispatch(fetchCards(drawing))
+      : dispatch(fetchCards(cards))
   }, [])
 
   return (
