@@ -5,13 +5,10 @@ import { PayloadAction } from '@reduxjs/toolkit'
 export const basketSlice = createAppSlice({
   name: 'basket',
   initialState: {
-    basket: [] as Card[],
-    counter: 0
+    basket: [] as Card[]
   },
   selectors: {
     setBasketCardsSelector: sliceState => sliceState.basket,
-    setCountCardInBasketSelector: sliceState =>
-      sliceState.basket.filter(c => c.basket).length,
     setBasketCounterSelector: sliceState =>
       sliceState.basket.reduce((total, card) => total + card.counter, 0)
   },
@@ -24,9 +21,7 @@ export const basketSlice = createAppSlice({
     return {
       fetchCards: creators.reducer((state, action: PayloadAction<Card[]>) => {
         state.basket = action.payload.map(el => ({
-          ...el,
-          totalCardPrise: 0,
-          totalCardDiscount: 0
+          ...el
         }))
       }),
       updateCardProperty: creators.reducer(
@@ -61,8 +56,5 @@ export const basketSlice = createAppSlice({
 export const { fetchCards, deleteCard, updateCardProperty } =
   basketSlice.actions
 
-export const {
-  setBasketCardsSelector,
-  setCountCardInBasketSelector,
-  setBasketCounterSelector
-} = basketSlice.selectors
+export const { setBasketCardsSelector, setBasketCounterSelector } =
+  basketSlice.selectors
