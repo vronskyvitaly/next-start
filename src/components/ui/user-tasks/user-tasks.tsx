@@ -4,7 +4,7 @@ import s from './user-tasks.module.scss'
 import { useForm } from 'react-hook-form'
 import { useRouter } from 'next/navigation'
 import { useOptimistic, useTransition } from 'react'
-import { Task } from '@/components'
+import { Task } from '@componentsUI/*'
 import { TaskType } from '@/app/(pages)/tasks/type'
 
 export function UserTasks({

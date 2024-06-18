@@ -1,14 +1,12 @@
 'use client'
 import s from './card-product.module.scss'
-import React, { useState } from 'react'
-import { DefaultImg } from '../../../ui/default-img'
-import { Button } from '../../../ui/button'
+import { DefaultImg, Button } from '@componentsUI/*'
 import Link from 'next/link'
 import { useAppDispatch, useAppSelector } from '@common/hooks'
 import {
   fetchCards,
-  isBasketStatus,
-  setBasketSelector
+  setBasketCardsSelector,
+  updateCardProperty
 } from '@/lib/features/basket-slice'
 import { useLocalStorage } from '@uidotdev/usehooks'
 
@@ -28,46 +26,48 @@ export const CardProduct = ({
   title = 'Nike',
   basket
 }: Props) => {
-  const dispatch = useAppDispatch()
-  const cards = useAppSelector(setBasketSelector)
-  const [cardIsBasket, setCardIsBasket] = useState<boolean>(basket)
+  const cards = useAppSelector(setBasketCardsSelector)
   const [drawing, saveDrawing] = useLocalStorage('cards', cards)
+  const dispatch = useAppDispatch()
 
-  const changeBasketStatus = (id: string, status: boolean) => {
-    // Возвращаю новый массив с объновленными данными
-    const newCardsData = drawing.map(el =>
-      el._id === id ? { ...el, basket: !status } : el
+  const toggleBasketStatus = (id: string, currentStatus: boolean) => {
+    // Обновляю статус и счетчик карточки в локальном массиве
+    const updatedCards = drawing.map(card => {
+      if (card._id === id) {
+        return {
+          ...card,
+          basket: !currentStatus,
+          counter: currentStatus ? 0 : 1
+        }
+      }
+      return card
+    })
+
+    // Обновляю статус и счетчик карточки в Redux
+    dispatch(
+      updateCardProperty({
+        id,
+        property: 'basket',
+        value: !currentStatus
+      })
     )
 
-    let newCardsData1
+    dispatch(
+      updateCardProperty({
+        id,
+        property: 'counter',
+        value: currentStatus ? 0 : 1
+      })
+    )
 
-    if (status) {
-      newCardsData1 = newCardsData.map(el =>
-        el._id === id ? { ...el, counter: 0 } : el
-      )
-    } else {
-      newCardsData1 = newCardsData.map(el =>
-        el._id === id ? { ...el, counter: 1 } : el
-      )
-    }
+    // Сохраняем обновленные данные в локальное хранилище
+    saveDrawing(updatedCards)
 
-    // Изменение статуса свойства basket в Redux на противоположное!
-    dispatch(isBasketStatus({ id, status: !status }))
-
-    // if (status) {
-    //   dispatch(fetchCards(newCardsData))
-    //   newCardsData.map(c => (c._id == id ? { ...c, counter: 1 } : c))
-    // } else {
-    //   dispatch(fetchCards(newCardsData))
-    //   newCardsData.map(c => (c._id == id ? { ...c, counter: 2 } : c))
-    // }
-
-    saveDrawing(newCardsData1)
+    // Обновляем Redux с новыми данными карточек
+    dispatch(fetchCards(updatedCards))
   }
 
-  const changeButtonIsBasketStatus = () => {
-    setCardIsBasket(prevState => !prevState)
-  }
+  console.log(cards)
 
   return (
     <div className={s.root}>
@@ -85,11 +85,10 @@ export const CardProduct = ({
       </Link>
 
       <Button
-        title={cardIsBasket ? 'B корзине' : 'В корзину'}
-        bg={cardIsBasket ? 'green' : 'black'}
+        title={basket ? 'B корзине' : 'В корзину'}
+        bg={basket ? 'green' : 'black'}
         onClick={() => {
-          changeBasketStatus(id, basket)
-          changeButtonIsBasketStatus()
+          toggleBasketStatus(id, basket)
         }}
       />
       {children}

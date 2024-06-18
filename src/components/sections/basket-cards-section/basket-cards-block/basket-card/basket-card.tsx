@@ -1,126 +1,90 @@
 import { Card } from '@app/api/cards/type'
 import s from './basket-card.module.scss'
-import { Typography } from '@componentsUI/typography'
+import { Typography, Button } from '@componentsUI/*'
 import { TypographyVariant } from '@common/enums'
-import React, { useEffect, useState } from 'react'
 import { AiFillDelete } from '@react-icons/all-files/ai/AiFillDelete'
-import { Button } from '@componentsUI/button'
 import { useAppDispatch, useAppSelector } from '@common/hooks'
 import {
-  fetchCards,
-  newTotalCardDiscount,
-  newTotalCardPrise,
-  setBasketSelector
+  setBasketCardsSelector,
+  updateCardProperty
 } from '@/lib/features/basket-slice'
-import { fetchCard } from '@app/(pages)/card/actions'
+import { useLocalStorage } from '@uidotdev/usehooks'
 
 type Props = {
-  children: React.ReactNode
-  key: string
   card: Card
-  checkboxPageState: boolean
-  removalFromCart: (id: string) => void
+  removingCardFromTheBasket: (id: string) => void
 }
 
-export const BasketCard = ({ card, removalFromCart, key, children }: Props) => {
-  const cards = useAppSelector(setBasketSelector)
-  const [counter, setCounter] = useState(1)
+export const BasketCard = ({ card, removingCardFromTheBasket }: Props) => {
   const dispatch = useAppDispatch()
+  const cards = useAppSelector(setBasketCardsSelector)
+  const [drawing, saveDrawing] = useLocalStorage('cards', cards)
 
-  // useEffect(() => {
-  //   const cardsL = localStorage.getItem('cards')
-  //   dispatch(fetchCards(JSON.parse(cardsL as string)))
-  // }, [])
-
-  const handlerBasketSum = (id: string) => cards.find(el => el._id === id)
-  const setBasketCount = (id: string, counter: number) => {
-    const newArray = cards.map(c =>
-      c._id === id ? { ...c, count: counter } : c
-    )
-    dispatch(fetchCards(newArray))
-    localStorage.setItem('cards', JSON.stringify(newArray))
-    return newArray
-  }
+  const handlerFindCard = (id: string) => drawing.find(el => el._id === id)
 
   const incCardProduct = (id: string) => {
-    setCounter(prevCounter => {
-      const newCounter = prevCounter + 1
-      const newBasketSum = handlerBasketSum(id)
-      if (newBasketSum) {
-        const newTotalPrise = newBasketSum.price * newCounter
-        const newTotalDiscount = newBasketSum.discount * newCounter
-        const newCards = setBasketCount(id, prevCounter + 1)
-        localStorage.setItem('cards', JSON.stringify(newCards))
+    const findCard = drawing.find(c => c._id === id)
+    if (findCard) {
+      let changeValueCount = ++findCard.counter
+      const updatedCards = drawing.map(c =>
+        c._id === id ? { ...c, counter: changeValueCount } : c
+      )
+      saveDrawing(updatedCards)
 
-        dispatch(
-          newTotalCardPrise({
-            id: id,
-            newCardTotalPrise: newTotalPrise
-            // counter: prevCounter + 1
-          })
-        )
-        dispatch(
-          newTotalCardDiscount({
-            id: id,
-            newTotalCardDiscount: newTotalDiscount
-          })
-        )
-      }
-      return newCounter
-    })
+      dispatch(
+        updateCardProperty({
+          id,
+          property: 'counter',
+          value: changeValueCount
+        })
+      )
+    }
   }
 
   const decCardProduct = (id: string) => {
-    setCounter(prevCounter => {
-      if (prevCounter > 1) {
-        const newCounter = prevCounter - 1
-        const newBasketSum = handlerBasketSum(id)
-        if (newBasketSum) {
-          const newTotalPrise = newBasketSum.price * newCounter
-          const newTotalDiscount = newBasketSum.discount * newCounter
-          const newCards = setBasketCount(id, prevCounter - 1)
+    const findCard = drawing.find(c => c._id === id)
+    if (findCard && findCard.counter > 1) {
+      let changeValueCount = --findCard.counter
+      const updatedCards = drawing.map(c =>
+        c._id === id ? { ...c, counter: changeValueCount } : c
+      )
+      saveDrawing(updatedCards)
 
-          localStorage.setItem('cards', JSON.stringify(newCards))
-
-          dispatch(
-            newTotalCardPrise({
-              id: id,
-              newCardTotalPrise: newTotalPrise
-              // counter: prevCounter - 1
-            })
-          )
-          dispatch(
-            newTotalCardDiscount({
-              id: id,
-              newTotalCardDiscount: newTotalDiscount
-            })
-          )
-        }
-        return newCounter
-      }
-      return prevCounter
-    })
+      dispatch(
+        updateCardProperty({
+          id,
+          property: 'counter',
+          value: changeValueCount
+        })
+      )
+    }
   }
-
-  const totalPrice = card.price * counter
-  const totalDiscountedPrice = card.discount
-    ? (card.price + card.discount) * counter
-    : totalPrice
 
   const getCount = (id: string): number => {
-    const card = cards.find(c => c._id === id)
-    return card ? (card.counter === 1 ? counter : card.counter) : 1
+    const card = drawing.find(c => c._id === id)
+    return card ? card.counter : 1
   }
 
-  console.log(cards)
+  function priceCard() {
+    return handlerFindCard(card._id)!.price
+  }
+
+  function discountCard() {
+    return handlerFindCard(card._id)!.discount
+  }
+
+  const totalPrice = priceCard() * getCount(card._id)
+  const totalDiscountedPrice = discountCard()
+    ? (priceCard() + discountCard()) * getCount(card._id)
+    : totalPrice
 
   return (
-    <div key={key} className={s.root}>
+    <div className={s.root}>
       <div className={s.wrapper}>
         <div className={s.deleteCardBtnWrapper}>
           <div
             className={s.deleteCardBtn}
-            onClick={() => removalFromCart(card._id)}
+            onClick={() => removingCardFromTheBasket(card._id)}
           >
             <AiFillDelete />
           </div>
@@ -139,7 +103,7 @@ export const BasketCard = ({ card, removalFromCart, key, children }: Props) => {
           <Button
             title={'-'}
             bg={'counter'}
-            disabled={counter <= 1}
+            disabled={getCount(card._id) <= 1}
             onClick={() => decCardProduct(card._id)}
           />
           <p>{getCount(card._id)}</p>
@@ -150,7 +114,6 @@ export const BasketCard = ({ card, removalFromCart, key, children }: Props) => {
           />
         </div>
       </div>
-      {children}
     </div>
   )
 }

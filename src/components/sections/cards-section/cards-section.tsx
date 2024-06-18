@@ -1,18 +1,18 @@
 'use client'
 
 import s from './cards.section.module.scss'
-import { Section } from '@/components'
+import { Section } from '@componentsUI/*'
 import React, { CSSProperties } from 'react'
-import { useSelector } from 'react-redux'
-import { setBasketSelector } from '@/lib/features/basket-slice'
+import { setBasketCardsSelector } from '@/lib/features/basket-slice'
 import { CardProduct } from '@components/sections/cards-section/card-product'
+import { useAppSelector } from '@common/hooks'
 
 type Props = {
   style?: CSSProperties
 }
 
 export function CardsSection({ style }: Props) {
-  const cards = useSelector(setBasketSelector)
+  const cards = useAppSelector(setBasketCardsSelector)
 
   return (
     <Section className={s.root} style={style}>

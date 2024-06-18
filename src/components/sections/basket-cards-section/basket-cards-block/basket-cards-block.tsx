@@ -1,65 +1,43 @@
 'use client'
-
 import s from './basket-cards-block.module.scss'
 import { useAppDispatch, useAppSelector } from '@common/hooks'
 import {
   deleteCard,
   fetchCards,
-  setBasketSelector
+  setBasketCardsSelector
 } from '@/lib/features/basket-slice'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { Card } from '@app/api/cards/type'
 import { BasketCard } from '@components/sections/basket-cards-section/basket-cards-block/basket-card'
+import { useLocalStorage } from '@uidotdev/usehooks'
 
 export const BasketCardsBlock = () => {
+  const cards = useAppSelector(setBasketCardsSelector)
+  const [drawing, saveDrawing] = useLocalStorage('cards', cards)
   const dispatch = useAppDispatch()
 
-  // Получаю карточки добавленные в корзину из Redux
-  const cards = useAppSelector(setBasketSelector)
-  const [localCards, setLocalCards] = useState<Card[]>(cards)
-  const [checkboxPageState, setCheckboxPageState] = useState(true)
-
   useEffect(() => {
-    // Преобразование объекта cards в строку JSON
-    const cardsStringifyJSON = JSON.stringify(cards)
-
-    // Преобразование объекта cards в массив
-    const cardsParsJSON = JSON.parse(cardsStringifyJSON)
-
-    // Проверяю есть ли в localstorage объект cards если нет вернется null
-    const isCardsLocaleStorage = localStorage.getItem('cards')
-
     // сохраняю в redux состояние карточки из localeStorage если есть или с server если нет
-    if (isCardsLocaleStorage !== null) {
-      setLocalCards(JSON.parse(isCardsLocaleStorage))
-      dispatch(fetchCards(JSON.parse(isCardsLocaleStorage)))
+    if (drawing !== null) {
+      dispatch(fetchCards(drawing))
     } else {
-      dispatch(fetchCards(cardsParsJSON))
+      dispatch(fetchCards(cards))
     }
   }, [])
 
   // Remove a card from the basket by clicking on the default icon
-  function removalFromCart(id: string) {
+  function removingCardFromTheBasket(id: string) {
     // Удаляем из локального state
-    setLocalCards(prevState => prevState.filter(c => c._id !== id))
-
+    saveDrawing(prevState => prevState.filter(c => c._id !== id))
     // Удаляем из redux
     dispatch(deleteCard({ id }))
-
-    // Получаю карточки из localStorage
-    const cardLocalStorage = localStorage.getItem('cards')
-
     // Изменяю состояние карточки в localstorage
-    const parsCardLocalStorage = JSON.parse(cardLocalStorage as string).map(
-      (c: Card) => (c._id === id ? { ...c, basket: false } : c)
+    const changeStatusCard = drawing.map((c: Card) =>
+      c._id === id ? { ...c, basket: false, counter: 0 } : c
     )
-    const stringifyCardLocalStorage = JSON.stringify(parsCardLocalStorage)
-
-    // Очищаю key в localStorage
-    localStorage.removeItem('cards')
-
+    dispatch(fetchCards(changeStatusCard))
     // Добавляю обновленные карточки
-    localStorage.setItem('cards', stringifyCardLocalStorage)
+    saveDrawing(changeStatusCard)
   }
 
   const renderBasketCards = () => {
@@ -68,17 +46,16 @@ export const BasketCardsBlock = () => {
 
     // Отфильтровываем карточки, которые находятся в корзине
     return isBasketArrayCards > 0 ? (
-      localCards
+      drawing
         .filter(el => el.basket)
         .map(card => (
-          <BasketCard
-            key={card._id}
-            card={card}
-            checkboxPageState={checkboxPageState}
-            removalFromCart={removalFromCart}
-          >
+          <div key={card._id}>
+            <BasketCard
+              card={card}
+              removingCardFromTheBasket={removingCardFromTheBasket}
+            ></BasketCard>
             <p className={s.link}>Поделиться</p>
-          </BasketCard>
+          </div>
         ))
     ) : (
       <h3>No cards</h3>

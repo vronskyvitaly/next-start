@@ -17,6 +17,7 @@
         "name": "next"
       }
     ],
+    "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"],
       "@app/*": ["./src/app/*"],
@@ -25,9 +26,8 @@
       "@common/*": ["./src/common/*"],
       "@enum/*": ["./src/common/enums/enums"],
       "@features/*": ["./src/features/*"],
-      "@componentsUI/*": ["./src/components/ui/*"],
+      "@componentsUI/*": ["./src/components/ui/index"],
     },
-    "baseUrl": "."
 
 
 

@@ -1,13 +1,13 @@
 'use client'
 import s from './header.module.scss'
-import { Button, Form, IconWrapper, Input, Logo } from '@/components'
+import { Button, Form, IconWrapper, Input, Logo } from '@componentsUI/*'
 import Link from 'next/link'
 import { Card } from '@/app/api/cards/type'
 import { useEffect } from 'react'
 import { useAppDispatch, useAppSelector } from '@/common/hooks'
 import {
   fetchCards,
-  setCountCardInBasketSelector
+  setBasketCounterSelector
 } from '@/lib/features/basket-slice'
 
 type HeaderProps = {
@@ -16,7 +16,7 @@ type HeaderProps = {
 
 export const Header = ({ cards }: HeaderProps) => {
   const dispatch = useAppDispatch()
-  const countCardInBasket = useAppSelector(setCountCardInBasketSelector)
+  const countCardInBasket = useAppSelector(setBasketCounterSelector)
 
   /***
    * Saving cards to localStorage

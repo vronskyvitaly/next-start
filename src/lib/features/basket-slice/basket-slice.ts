@@ -9,10 +9,11 @@ export const basketSlice = createAppSlice({
     counter: 0
   },
   selectors: {
-    setBasketSelector: sliceState => sliceState.basket,
+    setBasketCardsSelector: sliceState => sliceState.basket,
     setCountCardInBasketSelector: sliceState =>
       sliceState.basket.filter(c => c.basket).length,
-    initCounterBasketSelector: sliceState => sliceState.counter
+    setBasketCounterSelector: sliceState =>
+      sliceState.basket.reduce((total, card) => total + card.counter, 0)
   },
 
   reducers: creators => {
@@ -28,74 +29,18 @@ export const basketSlice = createAppSlice({
           totalCardDiscount: 0
         }))
       }),
-      isBasketStatus: creators.reducer(
-        (state, action: PayloadAction<{ id: string; status: boolean }>) => {
-          state.basket = state.basket.map(el =>
-            el._id === action.payload.id
-              ? {
-                  ...el,
-                  basket: action.payload.status
-                }
-              : el
-          )
-        }
-      ),
-      incBasketCount: creators.reducer(
-        (state, action: PayloadAction<{ id: string }>) => {
-          state.basket = state.basket.map(el =>
-            el._id === action.payload.id
-              ? {
-                  ...el,
-                  counter: el.counter + 1
-                }
-              : el
-          )
-        }
-      ),
-      decBasketCount: creators.reducer(
-        (state, action: PayloadAction<{ id: string }>) => {
-          state.basket = state.basket.map(el =>
-            el._id === action.payload.id
-              ? {
-                  ...el,
-                  counter: el.counter - 1
-                }
-              : el
-          )
-        }
-      ),
-      newTotalCardPrise: creators.reducer(
+      updateCardProperty: creators.reducer(
         (
           state,
           action: PayloadAction<{
             id: string
-            newCardTotalPrise: number
+            property: string
+            value: any
           }>
         ) => {
           state.basket = state.basket.map(el =>
             el._id === action.payload.id
-              ? {
-                  ...el,
-                  totalCardPrise: action.payload.newCardTotalPrise
-                }
-              : el
-          )
-        }
-      ),
-      newTotalCardDiscount: creators.reducer(
-        (
-          state,
-          action: PayloadAction<{
-            id: string
-            newTotalCardDiscount: number
-          }>
-        ) => {
-          state.basket = state.basket.map(el =>
-            el._id === action.payload.id
-              ? {
-                  ...el,
-                  totalCardDiscount: action.payload.newTotalCardDiscount
-                }
+              ? { ...el, [action.payload.property]: action.payload.value }
               : el
           )
           saveToLocalStorage(state.basket)
@@ -113,18 +58,11 @@ export const basketSlice = createAppSlice({
   }
 })
 
-export const {
-  fetchCards,
-  isBasketStatus,
-  deleteCard,
-  newTotalCardPrise,
-  newTotalCardDiscount,
-  incBasketCount,
-  decBasketCount
-} = basketSlice.actions
+export const { fetchCards, deleteCard, updateCardProperty } =
+  basketSlice.actions
 
 export const {
-  setBasketSelector,
+  setBasketCardsSelector,
   setCountCardInBasketSelector,
-  initCounterBasketSelector
+  setBasketCounterSelector
 } = basketSlice.selectors
