@@ -5,6 +5,7 @@ import { useAppDispatch, useAppSelector } from '@/common/hooks'
 import { fetchCards, setBasketCardsSelector } from '@/lib/features/basket-slice'
 import { useEffect } from 'react'
 import { Card } from '@/app/api/cards/type'
+import { useLocalStorage } from '@uidotdev/usehooks'
 
 type Props = {
   cards: Card[]
@@ -15,26 +16,20 @@ export const CardSection = ({ cards }: Props) => {
   const paramsKey = params.get('key')
   const cardsRedux = useAppSelector(setBasketCardsSelector)
   const dispatch = useAppDispatch()
+  const [drawing, saveDrawing] = useLocalStorage('cards', cards)
 
   useEffect(() => {
-    const localeStorageCards = localStorage.getItem('cards')
-    const isArrayLocalStorageArray = JSON.parse(localeStorageCards as string)
-    if (isArrayLocalStorageArray !== null) {
-      dispatch(fetchCards(JSON.parse(localeStorageCards as string)))
+    if (drawing !== null) {
+      dispatch(fetchCards(drawing))
     } else {
-      localStorage.setItem('cards', JSON.stringify(cardsRedux))
       dispatch(fetchCards(cardsRedux))
     }
   }, [])
 
-  function findCard() {
-    const card = cards.find(el => el._id === paramsKey)
-    if (card) {
-      return <h1>{card.title}</h1>
-    } else {
-      return <h1>Card not found</h1>
-    }
+  const renderCard = () => {
+    const findCard = cards.find(el => el._id === paramsKey)
+    return findCard ? <h1>{findCard.title}</h1> : <h1>Card not found</h1>
   }
 
-  return <section>{findCard()}</section>
+  return <section>{renderCard()}</section>
 }
