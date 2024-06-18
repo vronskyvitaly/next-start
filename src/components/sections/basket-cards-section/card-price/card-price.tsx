@@ -1,49 +1,42 @@
 import s from './card-price.module.scss'
-import { Button } from '@componentsUI/button'
-import { Typography } from '@componentsUI/typography'
-import { TypographyVariant } from '@enum/*'
+import { Button, Typography } from '@componentsUI/*'
+import { TypographyVariant } from '@common/enums'
 import cn from 'classnames'
 import { useAppSelector } from '@common/hooks'
 import {
-  setBasketSelector,
-  setCountCardInBasketSelector
+  setBasketCounterSelector,
+  setBasketCardsSelector
 } from '@/lib/features/basket-slice'
-import { Card } from '@app/api/cards/type'
-
-interface ICardCalculator {
-  cards: Card[]
-  totalSumWithOutDiscount: () => number
-  totalDiscount: () => number
-  totalSum: () => number
-}
 
 export const CardPrice = () => {
-  const countCardInBasket = useAppSelector(setCountCardInBasketSelector)
-  const cards = useAppSelector(setBasketSelector)
+  const counterBasketCards = useAppSelector(setBasketCounterSelector)
+  const cards = useAppSelector(setBasketCardsSelector)
 
-  function CardCalculator<T extends ICardCalculator>(
-    this: T,
-    cards: Card[]
-  ): void {
-    this.cards = cards.filter(c => c.basket)
-
-    this.totalSumWithOutDiscount = function () {
-      return this.cards.reduce((sum: number, card: Card) => sum + card.price, 0)
-    }
-
-    this.totalDiscount = function () {
-      return this.cards.reduce(
-        (sum: number, card: Card) => sum + (card.discount || 0),
-        0
-      )
-    }
-
-    this.totalSum = function () {
-      return this.totalSumWithOutDiscount() + this.totalDiscount()
-    }
+  const calculateTotalPrice = () => {
+    return cards.reduce((sum, card) => {
+      if (card.basket) {
+        return sum + card.price * card.counter
+      }
+      return sum
+    }, 0)
   }
 
-  const cardsFunctionality = new (CardCalculator as any)(cards)
+  const calculateTotalDiscount = () => {
+    return cards.reduce((sum, card) => {
+      if (card.basket) {
+        return sum + (card.discount || 0) * card.counter
+      }
+      return sum
+    }, 0)
+  }
+
+  const totalSumWithDiscount = () => {
+    return calculateTotalPrice() + calculateTotalDiscount()
+  }
+
+  const totalSumWithOutDiscount = () => {
+    return totalSumWithDiscount() - calculateTotalDiscount()
+  }
 
   return (
     <div className={s.cardPrice}>
@@ -58,16 +51,16 @@ export const CardPrice = () => {
       <div className={s.productAndDiscountBlock}>
         <div className={cn(s.productRow, s.row)}>
           <Typography variant={TypographyVariant.P} className={s.product}>
-            Tовары
+            Товары
           </Typography>
           <Typography variant={TypographyVariant.P} className={s.countProducts}>
-            ({countCardInBasket})
+            ({counterBasketCards})
           </Typography>
           <Typography
             variant={TypographyVariant.PriseV3}
             className={s.sumProduct}
           >
-            {cardsFunctionality.totalSum()}
+            {totalSumWithDiscount()}
           </Typography>
         </div>
         <div className={cn(s.discountRow, s.row)}>
@@ -76,7 +69,7 @@ export const CardPrice = () => {
             variant={TypographyVariant.PriseV3}
             className={s.discount}
           >
-            -{cardsFunctionality.totalDiscount()}
+            -{calculateTotalDiscount()}
           </Typography>
         </div>
       </div>
@@ -90,7 +83,7 @@ export const CardPrice = () => {
           as={'h4'}
           className={s.totalAmount}
         >
-          {cardsFunctionality.totalSumWithOutDiscount()}
+          {totalSumWithOutDiscount()}
         </Typography>
       </div>
     </div>

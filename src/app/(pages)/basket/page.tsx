@@ -1,7 +1,9 @@
 import s from './page.module.scss'
-import { Typography } from '@/components/ui/typography/typography'
-import { TypographyVariant } from '@/common/enums'
+import { Typography } from '@componentsUI/*'
+import { TypographyVariant } from '@enum/enums'
 import { BasketCardsSection } from '@components/sections/basket-cards-section'
+
+export const dynamic = 'force-dynamic'
 
 export default function BasketPage() {
   return (

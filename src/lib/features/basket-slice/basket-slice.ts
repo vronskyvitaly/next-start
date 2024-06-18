@@ -8,42 +8,53 @@ export const basketSlice = createAppSlice({
     basket: [] as Card[]
   },
   selectors: {
-    setBasketSelector: sliceState => sliceState.basket,
-    setCountCardInBasketSelector: sliceState =>
-      sliceState.basket.filter(c => c.basket).length
+    setBasketCardsSelector: sliceState => sliceState.basket,
+    setBasketCounterSelector: sliceState =>
+      sliceState.basket.reduce((total, card) => total + card.counter, 0)
   },
+
   reducers: creators => {
+    const saveToLocalStorage = (basket: Card[]) => {
+      localStorage.setItem('cards', JSON.stringify(basket))
+    }
+
     return {
       fetchCards: creators.reducer((state, action: PayloadAction<Card[]>) => {
-        state.basket = action.payload
+        state.basket = action.payload.map(el => ({
+          ...el
+        }))
       }),
-      isBasketStatus: creators.reducer(
-        (state, action: PayloadAction<{ id: string; status: boolean }>) => {
-          return {
-            ...state,
-            basket: state.basket.map(el =>
-              el._id === action.payload.id
-                ? { ...el, basket: action.payload.status }
-                : el
-            )
-          }
+      updateCardProperty: creators.reducer(
+        (
+          state,
+          action: PayloadAction<{
+            id: string
+            property: string
+            value: any
+          }>
+        ) => {
+          state.basket = state.basket.map(el =>
+            el._id === action.payload.id
+              ? { ...el, [action.payload.property]: action.payload.value }
+              : el
+          )
+          saveToLocalStorage(state.basket)
         }
       ),
       deleteCard: creators.reducer(
         (state, action: PayloadAction<{ id: string }>) => {
-          return {
-            ...state,
-            basket: state.basket.map(el =>
-              el._id === action.payload.id ? { ...el, basket: false } : el
-            )
-          }
+          state.basket = state.basket.map(el =>
+            el._id === action.payload.id ? { ...el, basket: false } : el
+          )
+          saveToLocalStorage(state.basket)
         }
       )
     }
   }
 })
 
-export const { fetchCards, isBasketStatus, deleteCard } = basketSlice.actions
+export const { fetchCards, deleteCard, updateCardProperty } =
+  basketSlice.actions
 
-export const { setBasketSelector, setCountCardInBasketSelector } =
+export const { setBasketCardsSelector, setBasketCounterSelector } =
   basketSlice.selectors

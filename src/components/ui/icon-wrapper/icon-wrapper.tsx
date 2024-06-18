@@ -1,5 +1,5 @@
-import { Typography } from '@componentsUI/typography'
-import { TypographyVariant } from '@enum/*'
+import { Typography } from '@componentsUI/*'
+import { TypographyVariant } from '@enum/enums'
 import s from './icon-wrapper.module.scss'
 import React from 'react'
 

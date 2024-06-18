@@ -1,11 +1,14 @@
 'use client'
 import s from './card-product.module.scss'
-import React, { useState } from 'react'
-import { DefaultImg } from '../../../ui/default-img'
-import { Button } from '../../../ui/button'
+import { DefaultImg, Button } from '@componentsUI/*'
 import Link from 'next/link'
 import { useAppDispatch, useAppSelector } from '@common/hooks'
-import { isBasketStatus, setBasketSelector } from '@/lib/features/basket-slice'
+import {
+  fetchCards,
+  setBasketCardsSelector,
+  updateCardProperty
+} from '@/lib/features/basket-slice'
+import { useLocalStorage } from '@uidotdev/usehooks'
 
 type Props = {
   children?: React.ReactNode
@@ -23,28 +26,48 @@ export const CardProduct = ({
   title = 'Nike',
   basket
 }: Props) => {
+  const cards = useAppSelector(setBasketCardsSelector)
+  const [drawing, saveDrawing] = useLocalStorage('cards', cards)
   const dispatch = useAppDispatch()
-  const cards = useAppSelector(setBasketSelector)
-  const [cardIsBasket, setCardIsBasket] = useState<boolean>(basket)
 
-  const changeBasketStatus = (id: string, status: boolean) => {
-    // Возвращаю новый массив с объновленными данными
-    const newCardsData = cards.map(el =>
-      el._id === id ? { ...el, basket: !status } : el
+  const toggleBasketStatus = (id: string, currentStatus: boolean) => {
+    // Обновляю статус и счетчик карточки в локальном массиве
+    const updatedCards = drawing.map(card => {
+      if (card._id === id) {
+        return {
+          ...card,
+          basket: !currentStatus,
+          counter: currentStatus ? 0 : 1
+        }
+      }
+      return card
+    })
+
+    // Обновляю статус и счетчик карточки в Redux
+    dispatch(
+      updateCardProperty({
+        id,
+        property: 'basket',
+        value: !currentStatus
+      })
     )
-    // Изменение статуса свойства basket на противоположное!
-    dispatch(isBasketStatus({ id, status: !status }))
 
-    // Преобразование массив в формат JSON
-    const cardsStringify = JSON.stringify(newCardsData)
+    dispatch(
+      updateCardProperty({
+        id,
+        property: 'counter',
+        value: currentStatus ? 0 : 1
+      })
+    )
 
-    // Сохраненяю данные в localStorage
-    localStorage.setItem('cards', cardsStringify)
+    // Сохраняем обновленные данные в локальное хранилище
+    saveDrawing(updatedCards)
+
+    // Обновляем Redux с новыми данными карточек
+    dispatch(fetchCards(updatedCards))
   }
 
-  const changeButtonIsBasketStatus = () => {
-    setCardIsBasket(prevState => !prevState)
-  }
+  console.log(cards)
 
   return (
     <div className={s.root}>
@@ -62,11 +85,10 @@ export const CardProduct = ({
       </Link>
 
       <Button
-        title={cardIsBasket ? 'B корзине' : 'В корзину'}
-        bg={cardIsBasket ? 'green' : 'black'}
+        title={basket ? 'B корзине' : 'В корзину'}
+        bg={basket ? 'green' : 'black'}
         onClick={() => {
-          changeBasketStatus(id, basket)
-          changeButtonIsBasketStatus()
+          toggleBasketStatus(id, basket)
         }}
       />
       {children}

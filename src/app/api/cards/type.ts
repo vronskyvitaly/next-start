@@ -5,4 +5,5 @@ export type Card = {
   discount: number
   hrefIng: string | null
   basket: boolean
+  counter: number
 }

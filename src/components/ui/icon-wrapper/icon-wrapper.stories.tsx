@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { IconWrapper } from './icon-wrapper'
+import { IconWrapper } from '@componentsUI/*'
 
 const meta: Meta<typeof IconWrapper> = {
   title: 'Components/IconWrapper',
