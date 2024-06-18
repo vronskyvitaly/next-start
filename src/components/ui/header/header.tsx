@@ -65,12 +65,15 @@ export const Header = ({ cards }: HeaderProps) => {
                 'https://static.vecteezy.com/system/resources/thumbnails/004/798/846/small/shopping-cart-logo-or-icon-design-vector.jpg'
               }
             />
-            <IconWrapper
-              subTitle={'Избранное'}
-              srcImg={
-                'https://static.vecteezy.com/system/resources/thumbnails/004/798/846/small/shopping-cart-logo-or-icon-design-vector.jpg'
-              }
-            />
+            <Link href={'/favorites'} className={s.link}>
+              <IconWrapper
+                subTitle={'Избранное'}
+                srcImg={
+                  'https://static.vecteezy.com/system/resources/thumbnails/004/798/846/small/shopping-cart-logo-or-icon-design-vector.jpg'
+                }
+              />
+            </Link>
+
             <div>
               <Link href={'/basket'} className={s.link}>
                 <IconWrapper
