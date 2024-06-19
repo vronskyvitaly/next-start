@@ -26,7 +26,7 @@ export function CardsSection({ style }: Props) {
                 key={c._id}
                 discount={c.discount}
                 price={c.price}
-                basket={c.basket}
+                cardInTheBasket={c.basket}
               ></CardProduct>
             )
           })}

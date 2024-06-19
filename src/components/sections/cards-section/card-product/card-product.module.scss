@@ -53,4 +53,9 @@
       font-size: 14px;
     }
   }
+
+  & .inBasketAndCounterBlock {
+    width: 100%;
+    @include flex($justify: space-between, $align: center);
+  }
 }
