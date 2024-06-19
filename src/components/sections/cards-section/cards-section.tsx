@@ -1,10 +1,9 @@
 'use client'
 
 import s from './cards.section.module.scss'
-import { Section } from '@componentsUI/*'
+import { Section, CardProduct } from '@componentsUI/*'
 import React, { CSSProperties } from 'react'
 import { setBasketCardsSelector } from '@/lib/features/basket-slice'
-import { CardProduct } from '@components/sections/cards-section/card-product'
 import { useAppSelector } from '@common/hooks'
 
 type Props = {
@@ -27,6 +26,7 @@ export function CardsSection({ style }: Props) {
                 discount={c.discount}
                 price={c.price}
                 cardInTheBasket={c.basket}
+                isFavorites={c.isFavorites}
               ></CardProduct>
             )
           })}

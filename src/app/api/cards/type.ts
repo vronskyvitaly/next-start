@@ -6,4 +6,5 @@ export type Card = {
   hrefIng: string | null
   basket: boolean
   counter: number
+  isFavorites: boolean
 }
