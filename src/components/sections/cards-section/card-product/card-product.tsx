@@ -16,7 +16,8 @@ type Props = {
   price?: number
   discount?: number
   title?: string
-  basket: boolean
+  cardInTheBasket: boolean
+  variants?: 'default' | 'inBasketAndCounter'
 }
 export const CardProduct = ({
   children,
@@ -24,7 +25,8 @@ export const CardProduct = ({
   discount = 6000,
   price = 3400,
   title = 'Nike',
-  basket
+  cardInTheBasket,
+  variants = 'default'
 }: Props) => {
   const cards = useAppSelector(setBasketCardsSelector)
   const [drawing, saveDrawing] = useLocalStorage('cards', cards)
@@ -84,14 +86,21 @@ export const CardProduct = ({
         <p className={s.title}>{title}</p>
       </Link>
 
-      <Button
-        title={basket ? 'B корзине' : 'В корзину'}
-        bg={basket ? 'green' : 'black'}
-        onClick={() => {
-          toggleBasketStatus(id, basket)
-        }}
-      />
-      {children}
+      {variants === 'default' ? (
+        <Button
+          title={cardInTheBasket ? 'B корзине' : 'В корзину'}
+          bg={cardInTheBasket ? 'green' : 'black'}
+          onClick={() => {
+            toggleBasketStatus(id, cardInTheBasket)
+          }}
+        />
+      ) : (
+        <div className={s.inBasketAndCounterBlock}>
+          <Button title={'-'} bg={'inBasketAndCounter'} />
+          <p>1</p>
+          <Button title={'+'} bg={'inBasketAndCounter'} />
+        </div>
+      )}
     </div>
   )
 }
