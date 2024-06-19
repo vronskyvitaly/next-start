@@ -7,7 +7,7 @@ type Props = {
   disabled?: boolean
   onClick?: () => void
   widthMax?: boolean
-  bg?: 'green' | 'black' | 'blue' | 'white' | 'counter'
+  bg?: 'green' | 'black' | 'blue' | 'white' | 'inBasket' | 'inBasketAndCounter'
 }
 export const Button = ({
   title,
@@ -27,8 +27,10 @@ export const Button = ({
           return cn(s.root, s.bgBlue)
         case 'white':
           return cn(s.root, s.bgWhite)
-        case 'counter':
-          return cn(s.root, s.bgCounter)
+        case 'inBasket':
+          return cn(s.root, s.inBasket)
+        case 'inBasketAndCounter':
+          return cn(s.root, s.inBasketAndCounter)
         default:
           return s.root
       }
@@ -42,7 +44,11 @@ export const Button = ({
       disabled={disabled}
       className={classNames.root()}
     >
-      {bg === 'counter' ? <p className={s.title}>{title}</p> : title}
+      {bg === 'inBasket' || bg === 'inBasketAndCounter' ? (
+        <p className={s.title}>{title}</p>
+      ) : (
+        title
+      )}
     </button>
   )
 }
