@@ -87,14 +87,14 @@ export const BasketCard = ({ card, removingCardFromTheBasket }: Props) => {
         <div className={s.counterBlock}>
           <Button
             title={'-'}
-            bg={'counter'}
+            bg={'inBasket'}
             disabled={getCardCount(card._id) <= 1}
             onClick={() => changeCardProduct(card._id, '-')}
           />
           <p>{getCardCount(card._id)}</p>
           <Button
             title={'+'}
-            bg={'counter'}
+            bg={'inBasket'}
             onClick={() => changeCardProduct(card._id, '+')}
           />
         </div>
