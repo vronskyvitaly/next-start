@@ -114,7 +114,7 @@ export const TransparentButton: Story = {
 export const DefaultCounterButton: Story = {
   args: {
     title: '-',
-    bg: 'counter'
+    bg: 'inBasket'
   }
 }
 
@@ -122,6 +122,21 @@ export const DisabledCounterButton: Story = {
   args: {
     disabled: true,
     title: '-',
-    bg: 'counter'
+    bg: 'inBasket'
+  }
+}
+
+export const DefaultBasketAndCounterButton: Story = {
+  args: {
+    title: '+',
+    bg: 'inBasketAndCounter'
+  }
+}
+
+export const DisabledBasketAndCounterButton: Story = {
+  args: {
+    disabled: true,
+    title: '-',
+    bg: 'inBasketAndCounter'
   }
 }
