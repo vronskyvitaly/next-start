@@ -1,12 +1,23 @@
 @import '@styles/*';
 
 .root {
+  position: relative;
   @include flex($direction: column, $justify: flex-start, $gap: 12px);
   padding: 20px;
   background-color: #e3e3e3;
   width: 100%;
   max-width: 270px;
   border-radius: 4px;
+
+  .wrapperFavoritesIcon {
+    cursor: pointer;
+    padding: 15px;
+    background-color: transparent;
+    @include flex($justify: center, $align: center);
+    position: absolute;
+    top: 10px;
+    right: 8px;
+  }
 
   & .actionWrapper {
     @include flex($direction: column, $gap: 12px);

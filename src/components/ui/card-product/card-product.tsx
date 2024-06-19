@@ -1,6 +1,6 @@
 'use client'
 import s from './card-product.module.scss'
-import { DefaultImg, Button } from '@componentsUI/*'
+import { DefaultImg, Button } from '@components/ui'
 import Link from 'next/link'
 import { useAppDispatch, useAppSelector } from '@common/hooks'
 import {
@@ -9,10 +9,11 @@ import {
   updateCardProperty
 } from '@/lib/features/basket-slice'
 import { useLocalStorage } from '@uidotdev/usehooks'
+import { FavoriteIcon } from '@/assets/icons'
 
 type Props = {
-  children?: React.ReactNode
   id: string
+  isFavorites: boolean
   price?: number
   discount?: number
   title?: string
@@ -20,7 +21,7 @@ type Props = {
   variants?: 'default' | 'inBasketAndCounter'
 }
 export const CardProduct = ({
-  children,
+  isFavorites,
   id,
   discount = 6000,
   price = 3400,
@@ -69,6 +70,34 @@ export const CardProduct = ({
     dispatch(fetchCards(updatedCards))
   }
 
+  function toggleInFavoritesStatus(id: string, currentStatus: boolean) {
+    // Обновляю статус и счетчик карточки в локальном массиве
+    const updatedCards = drawing.map(card => {
+      if (card._id === id) {
+        return {
+          ...card,
+          isFavorites: !currentStatus
+        }
+      }
+      return card
+    })
+
+    // Обновляю статус isFavorites в Redux
+    dispatch(
+      updateCardProperty({
+        id,
+        property: 'isFavorites',
+        value: !currentStatus
+      })
+    )
+
+    // Сохраняем обновленные данные в локальное хранилище
+    saveDrawing(updatedCards)
+
+    // Обновляем Redux с новыми данными карточек
+    dispatch(fetchCards(updatedCards))
+  }
+
   console.log(cards)
 
   return (
@@ -85,6 +114,12 @@ export const CardProduct = ({
         </span>
         <p className={s.title}>{title}</p>
       </Link>
+      <div
+        className={s.wrapperFavoritesIcon}
+        onClick={() => toggleInFavoritesStatus(id, isFavorites)}
+      >
+        <FavoriteIcon color={isFavorites ? 'red' : 'white'} />
+      </div>
 
       {variants === 'default' ? (
         <Button

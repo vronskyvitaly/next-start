@@ -26,6 +26,7 @@ export function CardsSection({ style }: Props) {
                 discount={c.discount}
                 price={c.price}
                 cardInTheBasket={c.basket}
+                isFavorites={c.isFavorites}
               ></CardProduct>
             )
           })}
