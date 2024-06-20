@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { IconWrapper } from '@componentsUI/*'
+import { IconsBlock } from '@components/ui'
 
-const meta: Meta<typeof IconWrapper> = {
-  title: 'Components/IconWrapper',
-  component: IconWrapper,
+const meta: Meta<typeof IconsBlock> = {
+  title: 'Components/IconsBlock',
+  component: IconsBlock,
   tags: ['autodocs']
 }
 
