@@ -1,13 +1,14 @@
 'use client'
 import s from './header.module.scss'
-import { Button, Form, IconWrapper, Input, Logo } from '@componentsUI/*'
+import { Button, Form, IconsBlock, Input, Logo } from '@componentsUI/*'
 import Link from 'next/link'
 import { Card } from '@/app/api/cards/type'
 import { useEffect } from 'react'
 import { useAppDispatch, useAppSelector } from '@/common/hooks'
 import {
   fetchCards,
-  setBasketCounterSelector
+  setBasketCounterSelector,
+  setFavoritesCounterSelector
 } from '@/lib/features/basket-slice'
 import { useLocalStorage } from '@uidotdev/usehooks'
 
@@ -18,6 +19,7 @@ type HeaderProps = {
 export const Header = ({ cards }: HeaderProps) => {
   const dispatch = useAppDispatch()
   const countCardInBasket = useAppSelector(setBasketCounterSelector)
+  const countCardInFavorites = useAppSelector(setFavoritesCounterSelector)
   const [drawing, saveDrawing] = useLocalStorage('cards', cards)
 
   useEffect(() => {
@@ -46,14 +48,16 @@ export const Header = ({ cards }: HeaderProps) => {
             <Button bg={'blue'} title={'Search'} />
           </Form>
           <div className={s.iconsBlock}>
-            <IconWrapper
+            <IconsBlock
               subTitle={'Войти'}
               srcImg={
                 'https://static.vecteezy.com/system/resources/thumbnails/004/798/846/small/shopping-cart-logo-or-icon-design-vector.jpg'
               }
             />
             <Link href={'/favorites'} className={s.link}>
-              <IconWrapper
+              <IconsBlock
+                variant={'favorites'}
+                counter={countCardInFavorites}
                 subTitle={'Избранное'}
                 srcImg={
                   'https://static.vecteezy.com/system/resources/thumbnails/004/798/846/small/shopping-cart-logo-or-icon-design-vector.jpg'
@@ -63,7 +67,7 @@ export const Header = ({ cards }: HeaderProps) => {
 
             <div>
               <Link href={'/basket'} className={s.link}>
-                <IconWrapper
+                <IconsBlock
                   counter={countCardInBasket}
                   subTitle={'Корзина'}
                   srcImg={
