@@ -3,7 +3,7 @@ import { CardProduct } from '@componentsUI/*'
 import StoreProvider from '@app/store-provider'
 
 const meta: Meta<typeof CardProduct> = {
-  title: 'Components/CardProducts',
+  title: 'Components/CardProduct',
   component: CardProduct,
   tags: ['autodocs']
 }
