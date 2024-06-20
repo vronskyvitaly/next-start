@@ -10,7 +10,9 @@ export const basketSlice = createAppSlice({
   selectors: {
     setBasketCardsSelector: sliceState => sliceState.basket,
     setBasketCounterSelector: sliceState =>
-      sliceState.basket.reduce((total, card) => total + card.counter, 0)
+      sliceState.basket.reduce((total, card) => total + card.counter, 0),
+    setFavoritesCounterSelector: sliceState =>
+      sliceState.basket.filter(card => card.isFavorites).length
   },
 
   reducers: creators => {
@@ -56,5 +58,8 @@ export const basketSlice = createAppSlice({
 export const { fetchCards, deleteCard, updateCardProperty } =
   basketSlice.actions
 
-export const { setBasketCardsSelector, setBasketCounterSelector } =
-  basketSlice.selectors
+export const {
+  setBasketCardsSelector,
+  setBasketCounterSelector,
+  setFavoritesCounterSelector
+} = basketSlice.selectors
