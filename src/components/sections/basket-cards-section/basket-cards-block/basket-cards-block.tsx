@@ -2,9 +2,9 @@
 import s from './basket-cards-block.module.scss'
 import { useAppDispatch, useAppSelector } from '@common/hooks'
 import {
-  deleteCard,
   fetchCards,
-  setBasketCardsSelector
+  setBasketCardsSelector,
+  updateCardProperty
 } from '@/lib/features/basket-slice'
 import { useEffect } from 'react'
 import { Card } from '@app/api/cards/type'
@@ -30,7 +30,13 @@ export const BasketCardsBlock = () => {
     // Удаляем из локального state
     saveDrawing(prevState => prevState.filter(c => c._id !== id))
     // Удаляем из redux
-    dispatch(deleteCard({ id }))
+    dispatch(
+      updateCardProperty({
+        id,
+        property: 'basket',
+        value: false
+      })
+    )
     // Изменяю состояние карточки в localstorage
     const changeStatusCard = drawing.map((c: Card) =>
       c._id === id ? { ...c, basket: false, counter: 0 } : c
