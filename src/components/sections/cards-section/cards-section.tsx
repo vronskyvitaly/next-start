@@ -3,7 +3,7 @@
 import s from './cards.section.module.scss'
 import { Section, CardProduct } from '@componentsUI/*'
 import React, { CSSProperties } from 'react'
-import { setBasketCardsSelector } from '@/lib/features/basket-slice'
+import { setCardsStateSelector } from '@/lib/features/basket-slice'
 import { useAppSelector } from '@common/hooks'
 
 type Props = {
@@ -11,7 +11,7 @@ type Props = {
 }
 
 export function CardsSection({ style }: Props) {
-  const cards = useAppSelector(setBasketCardsSelector)
+  const cards = useAppSelector(setCardsStateSelector)
 
   return (
     <Section className={s.root} style={style}>
@@ -20,13 +20,10 @@ export function CardsSection({ style }: Props) {
           {cards.map(c => {
             return (
               <CardProduct
-                id={c._id}
-                title={c.title}
+                {...c}
                 key={c._id}
-                discount={c.discount}
-                price={c.price}
+                id={c._id}
                 cardInTheBasket={c.basket}
-                isFavorites={c.isFavorites}
               ></CardProduct>
             )
           })}

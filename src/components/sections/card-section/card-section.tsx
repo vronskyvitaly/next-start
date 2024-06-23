@@ -2,7 +2,7 @@
 
 import { useSearchParams } from 'next/navigation'
 import { useAppDispatch, useAppSelector } from '@/common/hooks'
-import { fetchCards, setBasketCardsSelector } from '@/lib/features/basket-slice'
+import { saveCards, setCardsStateSelector } from '@/lib/features/basket-slice'
 import { useEffect } from 'react'
 import { Card } from '@/app/api/cards/type'
 import { useLocalStorage } from '@uidotdev/usehooks'
@@ -12,17 +12,16 @@ type Props = {
 }
 
 export const CardSection = ({ cards }: Props) => {
-  const params = useSearchParams()
-  const paramsKey = params.get('key')
-  const cardsRedux = useAppSelector(setBasketCardsSelector)
+  const paramsKey = useSearchParams().get('key')
+  const cardsRedux = useAppSelector(setCardsStateSelector)
   const dispatch = useAppDispatch()
   const [drawing, saveDrawing] = useLocalStorage('cards', cards)
 
   useEffect(() => {
     if (drawing !== null) {
-      dispatch(fetchCards(drawing))
+      dispatch(saveCards(drawing))
     } else {
-      dispatch(fetchCards(cardsRedux))
+      dispatch(saveCards(cardsRedux))
     }
   }, [])
 
