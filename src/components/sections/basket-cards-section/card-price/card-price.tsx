@@ -5,12 +5,12 @@ import cn from 'classnames'
 import { useAppSelector } from '@common/hooks'
 import {
   setBasketCounterSelector,
-  setBasketCardsSelector
+  setCardsStateSelector
 } from '@/lib/features/basket-slice'
 
 export const CardPrice = () => {
   const counterBasketCards = useAppSelector(setBasketCounterSelector)
-  const cards = useAppSelector(setBasketCardsSelector)
+  const cards = useAppSelector(setCardsStateSelector)
 
   const calculateTotalPrice = () => {
     return cards.reduce((sum, card) => {

@@ -69,4 +69,20 @@
     width: 100%;
     @include flex($justify: space-between, $align: center);
   }
+
+  .red {
+    color: var(--color-danger-300);
+  }
+
+  .black {
+    color: var(--color-dark-900);
+  }
+
+  .white {
+    color: var(--color-light-100);
+  }
+
+  .green {
+    color: var(--color-success-500);
+  }
 }

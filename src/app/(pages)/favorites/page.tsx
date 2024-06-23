@@ -2,6 +2,7 @@ import s from './page.module.scss'
 import { Header, Typography } from '@componentsUI/*'
 import { TypographyVariant } from '@enum/enums'
 import { fetchCards } from '@components/sections/cards-section/actions'
+import { FavoritesCardsSection } from '@components/sections/favorites-cards-section'
 
 export default async function Page() {
   const cards = await fetchCards()
@@ -13,6 +14,7 @@ export default async function Page() {
           Товары и списки
         </Typography>
       </div>
+      <FavoritesCardsSection />
     </article>
   )
 }

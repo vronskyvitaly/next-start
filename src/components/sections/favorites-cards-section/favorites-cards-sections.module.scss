@@ -1,0 +1,15 @@
+@import '@mixins/*';
+.root {
+  padding: 40px 0;
+
+  & .container {
+    @include container;
+  }
+
+  & .flex {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+    justify-items: center;
+    gap: 40px;
+  }
+}

@@ -2,9 +2,9 @@
 import s from './basket-cards-block.module.scss'
 import { useAppDispatch, useAppSelector } from '@common/hooks'
 import {
-  deleteCard,
-  fetchCards,
-  setBasketCardsSelector
+  saveCards,
+  setCardsStateSelector,
+  updateCardProperty
 } from '@/lib/features/basket-slice'
 import { useEffect } from 'react'
 import { Card } from '@app/api/cards/type'
@@ -12,16 +12,16 @@ import { BasketCard } from '@components/sections/basket-cards-section/basket-car
 import { useLocalStorage } from '@uidotdev/usehooks'
 
 export const BasketCardsBlock = () => {
-  const cards = useAppSelector(setBasketCardsSelector)
+  const cards = useAppSelector(setCardsStateSelector)
   const [drawing, saveDrawing] = useLocalStorage('cards', cards)
   const dispatch = useAppDispatch()
 
   useEffect(() => {
     // сохраняю в redux состояние карточки из localeStorage если есть или с server если нет
     if (drawing !== null) {
-      dispatch(fetchCards(drawing))
+      dispatch(saveCards(drawing))
     } else {
-      dispatch(fetchCards(cards))
+      dispatch(saveCards(cards))
     }
   }, [])
 
@@ -30,12 +30,18 @@ export const BasketCardsBlock = () => {
     // Удаляем из локального state
     saveDrawing(prevState => prevState.filter(c => c._id !== id))
     // Удаляем из redux
-    dispatch(deleteCard({ id }))
+    dispatch(
+      updateCardProperty({
+        id,
+        property: 'basket',
+        value: false
+      })
+    )
     // Изменяю состояние карточки в localstorage
     const changeStatusCard = drawing.map((c: Card) =>
       c._id === id ? { ...c, basket: false, counter: 0 } : c
     )
-    dispatch(fetchCards(changeStatusCard))
+    dispatch(saveCards(changeStatusCard))
     // Добавляю обновленные карточки
     saveDrawing(changeStatusCard)
   }

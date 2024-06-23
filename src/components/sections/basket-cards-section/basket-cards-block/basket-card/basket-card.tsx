@@ -5,7 +5,7 @@ import { TypographyVariant } from '@common/enums'
 import { AiFillDelete } from '@react-icons/all-files/ai/AiFillDelete'
 import { useAppDispatch, useAppSelector } from '@common/hooks'
 import {
-  setBasketCardsSelector,
+  setCardsStateSelector,
   updateCardProperty
 } from '@/lib/features/basket-slice'
 import { useLocalStorage } from '@uidotdev/usehooks'
@@ -17,7 +17,7 @@ type Props = {
 
 export const BasketCard = ({ card, removingCardFromTheBasket }: Props) => {
   const dispatch = useAppDispatch()
-  const cards = useAppSelector(setBasketCardsSelector)
+  const cards = useAppSelector(setCardsStateSelector)
   const [drawing, saveDrawing] = useLocalStorage('cards', cards)
 
   const handlerFindCard = (id: string) => drawing.find(el => el._id === id)

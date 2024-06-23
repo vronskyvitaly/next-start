@@ -7,4 +7,5 @@ export type Card = {
   basket: boolean
   counter: number
   isFavorites: boolean
+  isModified: boolean
 }

@@ -2,17 +2,23 @@ import { createAppSlice } from '@/common/utils/create-app-slice'
 import { Card } from '@/app/api/cards/type'
 import { PayloadAction } from '@reduxjs/toolkit'
 
-export const basketSlice = createAppSlice({
-  name: 'basket',
+/**
+ *@debuger
+ * const st = current(state)
+ * console.log(st)
+ */
+
+export const rootSlice = createAppSlice({
+  name: 'root',
   initialState: {
-    basket: [] as Card[]
+    cardsState: [] as Card[]
   },
   selectors: {
-    setBasketCardsSelector: sliceState => sliceState.basket,
+    setCardsStateSelector: sliceState => sliceState.cardsState,
     setBasketCounterSelector: sliceState =>
-      sliceState.basket.reduce((total, card) => total + card.counter, 0),
+      sliceState.cardsState.reduce((acc, card) => acc + card.counter, 0),
     setFavoritesCounterSelector: sliceState =>
-      sliceState.basket.filter(card => card.isFavorites).length
+      sliceState.cardsState.filter(c => c.isFavorites && !c.isModified).length
   },
 
   reducers: creators => {
@@ -21,9 +27,10 @@ export const basketSlice = createAppSlice({
     }
 
     return {
-      fetchCards: creators.reducer((state, action: PayloadAction<Card[]>) => {
-        state.basket = action.payload.map(el => ({
-          ...el
+      saveCards: creators.reducer((state, action: PayloadAction<Card[]>) => {
+        state.cardsState = action.payload.map(el => ({
+          ...el,
+          isModified: false
         }))
       }),
       updateCardProperty: creators.reducer(
@@ -35,31 +42,22 @@ export const basketSlice = createAppSlice({
             value: any
           }>
         ) => {
-          state.basket = state.basket.map(el =>
+          state.cardsState = state.cardsState.map(el =>
             el._id === action.payload.id
               ? { ...el, [action.payload.property]: action.payload.value }
               : el
           )
-          saveToLocalStorage(state.basket)
-        }
-      ),
-      deleteCard: creators.reducer(
-        (state, action: PayloadAction<{ id: string }>) => {
-          state.basket = state.basket.map(el =>
-            el._id === action.payload.id ? { ...el, basket: false } : el
-          )
-          saveToLocalStorage(state.basket)
+          saveToLocalStorage(state.cardsState)
         }
       )
     }
   }
 })
 
-export const { fetchCards, deleteCard, updateCardProperty } =
-  basketSlice.actions
+export const { saveCards, updateCardProperty } = rootSlice.actions
 
 export const {
-  setBasketCardsSelector,
+  setCardsStateSelector,
   setBasketCounterSelector,
   setFavoritesCounterSelector
-} = basketSlice.selectors
+} = rootSlice.selectors
