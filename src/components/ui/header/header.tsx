@@ -6,33 +6,39 @@ import { Card } from '@/app/api/cards/type'
 import { useEffect } from 'react'
 import { useAppDispatch, useAppSelector } from '@/common/hooks'
 import {
-  fetchCards,
+  saveCards,
   setBasketCounterSelector,
   setFavoritesCounterSelector
 } from '@/lib/features/basket-slice'
 import { useLocalStorage } from '@uidotdev/usehooks'
+import { useRouter } from 'next/navigation'
 
 type HeaderProps = {
   cards: Card[]
 }
 
 export const Header = ({ cards }: HeaderProps) => {
-  const dispatch = useAppDispatch()
+  const router = useRouter()
   const countCardInBasket = useAppSelector(setBasketCounterSelector)
   const countCardInFavorites = useAppSelector(setFavoritesCounterSelector)
   const [drawing, saveDrawing] = useLocalStorage('cards', cards)
+  const dispatch = useAppDispatch()
 
   useEffect(() => {
-    drawing !== null
-      ? dispatch(fetchCards(drawing))
-      : dispatch(fetchCards(cards))
+    drawing !== null ? dispatch(saveCards(drawing)) : dispatch(saveCards(cards))
   }, [])
+
+  const handleLogoClick = () => {
+    router.prefetch('/')
+  }
 
   return (
     <header className={s.root}>
       <div className={s.container}>
         <div className={s.flex}>
-          <Logo />
+          <div onClick={handleLogoClick} style={{ cursor: 'pointer' }}>
+            <Logo />
+          </div>
           <Form
             style={{
               flexDirection: 'row',
