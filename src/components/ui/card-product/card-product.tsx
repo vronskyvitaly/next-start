@@ -1,52 +1,95 @@
 'use client'
 import s from './card-product.module.scss'
-import { DefaultImg, Button } from '@components/ui'
+import { Button, DefaultImg } from '@componentsUI/*'
 import Link from 'next/link'
-import { useAppDispatch, useAppSelector } from '@common/hooks'
-import {
-  fetchCards,
-  setBasketCardsSelector,
-  updateCardProperty
-} from '@/lib/features/basket-slice'
-import { useLocalStorage } from '@uidotdev/usehooks'
+import { useAppDispatch } from '@common/hooks'
+import { updateCardProperty } from '@/lib/features/basket-slice'
 import { FavoriteIcon } from '@/assets/icons'
+import { useEffect, useState } from 'react'
 
 type Props = {
   id: string
   isFavorites: boolean
+  isNot?: boolean
+  isModified?: boolean
   price?: number
   discount?: number
   title?: string
   cardInTheBasket: boolean
+  counter?: number
   variants?: 'default' | 'inBasketAndCounter'
 }
+
+// Выбираем поля, которые должны быть обязательными
+type MandatoryProps = Required<
+  Pick<Props, 'id' | 'isFavorites' | 'cardInTheBasket'>
+>
+
+// Делаем остальные поля необязательными
+type OptionalProps = Partial<
+  Omit<Props, 'id' | 'isFavorites' | 'cardInTheBasket'>
+>
+
+// Комбинируем обязательные и необязательные поля
+type CombinedProps = MandatoryProps & OptionalProps
+
 export const CardProduct = ({
   isFavorites,
+  isModified,
+  counter = 0,
   id,
   discount = 6000,
   price = 3400,
   title = 'Nike',
   cardInTheBasket,
   variants = 'default'
-}: Props) => {
-  const cards = useAppSelector(setBasketCardsSelector)
-  const [drawing, saveDrawing] = useLocalStorage('cards', cards)
+}: CombinedProps) => {
+  const [currentUrl, setCurrentUrl] = useState<string>('')
+  const [isChanged, setIsIsChanged] = useState(false)
   const dispatch = useAppDispatch()
 
-  const toggleBasketStatus = (id: string, currentStatus: boolean) => {
-    // Обновляю статус и счетчик карточки в локальном массиве
-    const updatedCards = drawing.map(card => {
-      if (card._id === id) {
-        return {
-          ...card,
-          basket: !currentStatus,
-          counter: currentStatus ? 0 : 1
-        }
-      }
-      return card
-    })
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      setCurrentUrl(window.location.pathname)
+    }
+  }, [])
 
-    // Обновляю статус и счетчик карточки в Redux
+  enum IS_BASKET {
+    ON = 'в корзине',
+    OFF = 'В корзину'
+  }
+
+  enum COLOR {
+    RED = 'red',
+    BLACK = 'black',
+    WHITE = 'white',
+    GREEN = 'green'
+  }
+
+  enum ACTION {
+    PLUS = '+',
+    MINUS = '-'
+  }
+
+  const toggleBasketCounter = (id: string, currentStatus: boolean) => {
+    return currentStatus
+      ? dispatch(
+          updateCardProperty({
+            id,
+            property: 'counter',
+            value: 0
+          })
+        )
+      : dispatch(
+          updateCardProperty({
+            id,
+            property: 'counter',
+            value: 1
+          })
+        )
+  }
+
+  const toggleBasketStatus = (id: string, currentStatus: boolean) => {
     dispatch(
       updateCardProperty({
         id,
@@ -54,51 +97,79 @@ export const CardProduct = ({
         value: !currentStatus
       })
     )
-
-    dispatch(
-      updateCardProperty({
-        id,
-        property: 'counter',
-        value: currentStatus ? 0 : 1
-      })
-    )
-
-    // Сохраняем обновленные данные в локальное хранилище
-    saveDrawing(updatedCards)
-
-    // Обновляем Redux с новыми данными карточек
-    dispatch(fetchCards(updatedCards))
   }
 
   function toggleInFavoritesStatus(id: string, currentStatus: boolean) {
-    // Обновляю статус и счетчик карточки в локальном массиве
-    const updatedCards = drawing.map(card => {
-      if (card._id === id) {
-        return {
-          ...card,
-          isFavorites: !currentStatus
-        }
-      }
-      return card
-    })
-
-    // Обновляю статус isFavorites в Redux
-    dispatch(
-      updateCardProperty({
-        id,
-        property: 'isFavorites',
-        value: !currentStatus
-      })
-    )
-
-    // Сохраняем обновленные данные в локальное хранилище
-    saveDrawing(updatedCards)
-
-    // Обновляем Redux с новыми данными карточек
-    dispatch(fetchCards(updatedCards))
+    if (currentUrl === '/favorites') {
+      setIsIsChanged(prevState => !prevState)
+      dispatch(
+        updateCardProperty({
+          id,
+          property: 'isFavorites',
+          value: !currentStatus
+        })
+      )
+      dispatch(
+        updateCardProperty({
+          id,
+          property: 'isModified',
+          value: !isChanged
+        })
+      )
+    } else {
+      console.log('сработала 226')
+      dispatch(
+        updateCardProperty({
+          id,
+          property: 'isFavorites',
+          value: !currentStatus
+        })
+      )
+    }
   }
 
-  console.log(cards)
+  function changeBasketCounter(
+    currentCounterValue: number,
+    action: ACTION.PLUS | ACTION.MINUS
+  ) {
+    return action === ACTION.PLUS
+      ? ++currentCounterValue
+      : --currentCounterValue
+  }
+
+  const changeValueProduct = (
+    id: string,
+    actions: ACTION.PLUS | ACTION.MINUS,
+    currentCounter: number
+  ) => {
+    let newCounterValue = changeBasketCounter(currentCounter, actions)
+
+    if (newCounterValue > 0) {
+      dispatch(
+        updateCardProperty({
+          id,
+          property: 'counter',
+          value: newCounterValue
+        })
+      )
+    } else {
+      // Удаление карточки из корзины при уменьшении до 0
+      dispatch(
+        updateCardProperty({
+          id,
+          property: 'basket',
+          value: false
+        })
+      )
+      dispatch(
+        updateCardProperty({
+          id,
+          property: 'counter',
+          value: 0
+        })
+      )
+    }
+  }
 
   return (
     <div className={s.root}>
@@ -114,27 +185,50 @@ export const CardProduct = ({
         </span>
         <p className={s.title}>{title}</p>
       </Link>
+
       <div
         className={s.wrapperFavoritesIcon}
         onClick={() => toggleInFavoritesStatus(id, isFavorites)}
       >
-        <FavoriteIcon color={isFavorites ? 'red' : 'white'} />
+        {currentUrl !== '/favorites' ? (
+          <FavoriteIcon color={isFavorites ? COLOR.RED : COLOR.WHITE} />
+        ) : (
+          <FavoriteIcon color={isChanged ? COLOR.WHITE : COLOR.RED} />
+        )}
       </div>
 
       {variants === 'default' ? (
         <Button
-          title={cardInTheBasket ? 'B корзине' : 'В корзину'}
-          bg={cardInTheBasket ? 'green' : 'black'}
+          title={cardInTheBasket ? IS_BASKET.ON : IS_BASKET.OFF}
+          bg={cardInTheBasket ? COLOR.GREEN : COLOR.BLACK}
           onClick={() => {
             toggleBasketStatus(id, cardInTheBasket)
+            toggleBasketCounter(id, cardInTheBasket)
           }}
         />
-      ) : (
+      ) : cardInTheBasket ? (
         <div className={s.inBasketAndCounterBlock}>
-          <Button title={'-'} bg={'inBasketAndCounter'} />
-          <p>1</p>
-          <Button title={'+'} bg={'inBasketAndCounter'} />
+          <Button
+            title={ACTION.MINUS}
+            bg={'inBasketAndCounter'}
+            onClick={() => changeValueProduct(id, ACTION.MINUS, counter)}
+          />
+          <p>{counter}</p>
+          <Button
+            title={ACTION.PLUS}
+            bg={'inBasketAndCounter'}
+            onClick={() => changeValueProduct(id, ACTION.PLUS, counter)}
+          />
         </div>
+      ) : (
+        <Button
+          title={IS_BASKET.OFF}
+          bg={COLOR.BLACK}
+          onClick={async () => {
+            toggleBasketStatus(id, cardInTheBasket)
+            toggleBasketCounter(id, cardInTheBasket)
+          }}
+        />
       )}
     </div>
   )
