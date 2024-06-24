@@ -1,10 +1,11 @@
 @import '@mixins/*';
 
 .root {
-  padding-top: 20px;
-  padding-bottom: 20px;
+  padding: 20px 0;
   border-top: 1px solid black;
   border-bottom: 1px solid black;
+  width: 100%;
+  min-width: 700px;
 
   .wrapper {
     @include flex($align: flex-start);
@@ -15,58 +16,55 @@
     height: 94px;
     padding-left: 12px;
     padding-right: 12px;
+
+    & .deleteCardBtn {
+      @include flex($justify: center, $align: stretch);
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      cursor: pointer;
+    }
   }
 
-  .deleteCardBtn {
-    @include flex($justify: center, $align: stretch);
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    cursor: pointer;
-  }
-
-  .flexImgAndTitle {
+  .imgAndTitleBlock {
     @include flex($justify: center, $align: flex-start, $gap: 12px);
+
+    & .defaultImg {
+      min-width: 92px;
+      height: 92px;
+      background-color: #333333;
+      border-radius: 4px;
+    }
+    & .title {
+      width: 100%;
+      min-width: 150px;
+      height: 92px;
+      overflow: hidden;
+      margin-right: 20px;
+    }
   }
 
-  .defaultImgCard {
-    width: 92px;
-    height: 92px;
-    background-color: #333333;
-    border-radius: 4px;
-  }
-
-  .priceAndDiscount {
-    width: 100%;
-    padding-top: 6px;
-    display: flex;
-    align-items: center;
-    padding-left: 124px;
-    gap: 6px;
+  .priceAndDiscountBlock {
+    width: 180px;
+    @include flex($align: center, $gap: 6px);
+    & .price {
+      &:after {
+        padding-left: 2px;
+        content: '\20BD';
+      }
+    }
 
     & .discount {
-      font-size: 14px;
-      font-family: Inter sans-serif;
-      font-style: normal;
-      font-weight: 700;
-      line-height: 17px;
-      text-decoration-line: line-through;
-      color: rgba(0, 0, 0, 0.3);
+      &:after {
+        padding-left: 2px;
+        content: '\20BD';
+      }
     }
   }
 
   .counterBlock {
-    padding-left: 40px;
+    width: 205px;
     max-height: 48px;
-    display: flex;
-    gap: 40px;
-    align-items: center;
-    & .btn {
-      font-size: 38px;
-      background-color: #eef7ff;
-      width: 48px;
-      height: 48px;
-      border-radius: 4px;
-    }
+    @include flex($justify: space-between, $align: center);
   }
 }
