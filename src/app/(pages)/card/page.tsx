@@ -1,6 +1,8 @@
 import { CardSection } from '@components/sections/card-section/card-section'
 import { fetchCards } from '@components/sections/cards-section/actions'
+import s from './page.module.scss'
 import { Metadata } from 'next'
+import { Header } from '@componentsUI/*'
 
 export const metadata: Metadata = {
   title: 'Card page',
@@ -11,7 +13,8 @@ export const metadata: Metadata = {
 export default async function Page() {
   const cards = await fetchCards()
   return (
-    <article>
+    <article className={s.root}>
+      <Header cards={cards} />
       <CardSection cards={cards} />
     </article>
   )
