@@ -1,7 +1,7 @@
 import { Card } from '@app/api/cards/type'
 import s from './basket-card.module.scss'
 import { Typography, Button } from '@componentsUI/*'
-import { TypographyVariant } from '@common/enums'
+import { TypographyVariant } from '@enum/*'
 import { AiFillDelete } from '@react-icons/all-files/ai/AiFillDelete'
 import { useAppDispatch, useAppSelector } from '@common/hooks'
 import {
@@ -74,15 +74,26 @@ export const BasketCard = ({ card, removingCardFromTheBasket }: Props) => {
             <AiFillDelete />
           </div>
         </div>
-        <div className={s.flexImgAndTitle}>
-          <div className={s.defaultImgCard}></div>
-          <h2>{card.title}</h2>
+        <div className={s.imgAndTitleBlock}>
+          <div className={s.defaultImg}></div>
+          <Typography
+            className={s.title}
+            variant={TypographyVariant.PriseV3}
+            as={'h4'}
+          >
+            {card.title}
+          </Typography>
         </div>
-        <div className={s.priceAndDiscount}>
-          <Typography variant={TypographyVariant.PriseV2} as={'h4'}>
+        <div className={s.priceAndDiscountBlock}>
+          <Typography className={s.price} variant={TypographyVariant.PriseV3}>
             {totalPrice}
           </Typography>
-          <h5 className={s.discount}>{totalPriseWithDiscount}</h5>
+          <Typography
+            className={s.discount}
+            variant={TypographyVariant.PriseV4}
+          >
+            {totalPriseWithDiscount}
+          </Typography>
         </div>
         <div className={s.counterBlock}>
           <Button
