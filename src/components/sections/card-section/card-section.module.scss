@@ -1,0 +1,79 @@
+@import '@mixins/*';
+
+.root {
+  padding-top: 60px;
+  padding-bottom: 40px;
+
+  & .container {
+    @include container;
+    & .line {
+      position: relative;
+      height: 1px;
+      width: 100%;
+      background-color: var(--color-dark-900);
+
+      & .barCode {
+        position: absolute;
+        right: 0;
+        bottom: 8px;
+      }
+    }
+
+    & .cardWrapper {
+      padding-top: 20px;
+      @include flex($justify: space-between, $gap: 40px);
+
+      & .imagesAndCharacteristicsBlock {
+        @include flex($direction: row, $gap: 20px);
+
+        & .imagAndOptionsImagesBlock {
+          @include flex($justify: center, $align: center, $gap: 40px);
+
+          & .optionsImagesBlock {
+            @include flex($direction: column, $gap: 20px);
+          }
+        }
+
+        & .characteristicsBlock {
+          & li {
+            font-size: 14px;
+            list-style-type: none;
+          }
+          & li + li {
+            margin-top: 10px;
+          }
+        }
+      }
+
+      & .cardPriceAndLinksBlock {
+        @include flex($direction: column);
+        & .cardPrice {
+          width: 374px;
+          height: 181px;
+          background: var(--color-light-100);
+          box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+          border-radius: 4px;
+          //padding: 40px;
+        }
+        & .linksAndTitleBlock {
+          padding-top: 20px;
+          @include flex($direction: column, $gap: 12px);
+
+          .linksBlock {
+            & ul {
+              display: grid;
+              grid-template-columns: 147px 1fr;
+              grid-template-rows: 1fr 1fr;
+              row-gap: 12px;
+              list-style-type: none;
+
+              & a {
+                color: var(--color-info-500);
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
