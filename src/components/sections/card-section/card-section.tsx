@@ -2,9 +2,10 @@
 import s from './card-section.module.scss'
 import { useSearchParams } from 'next/navigation'
 import { Card } from '@/app/api/cards/type'
-import { DefaultImg, Typography } from '@/components'
+import { DefaultImg, Typography } from '@componentsUI/*'
 import { TypographyVariant } from '@enum/*'
 import Link from 'next/link'
+import { CardPrice } from './card-price/card-price'
 
 type Props = {
   cards: Card[]
@@ -12,7 +13,6 @@ type Props = {
 
 export const CardSection = ({ cards }: Props) => {
   const paramsKey = useSearchParams().get('key')
-  // const cardsRedux = useAppSelector(setCardsStateSelector)
 
   return (
     <section className={s.root}>
@@ -34,30 +34,30 @@ export const CardSection = ({ cards }: Props) => {
                 </div>
                 <div className={s.characteristicsBlock}>
                   <ul>
-                    <li>Цвет:</li>
-                    <li>Страна изготовитель:</li>
-                    <li>Высота, см:</li>
-                    <li>Ширина, см:</li>
-                    <li>
+                    <Typography as={'li'}>Цвет:</Typography>
+                    <Typography as={'li'}>Страна изготовитель:</Typography>
+                    <Typography as={'li'}>Высота, см:</Typography>
+                    <Typography as={'li'}>Ширина, см:</Typography>
+                    <Typography as={'li'}>
                       <Typography variant={TypographyVariant.Link} as={'a'}>
                         Перейти к описанию
                       </Typography>
-                    </li>
+                    </Typography>
                   </ul>
                 </div>
               </div>
               <div className={s.cardPriceAndLinksBlock}>
-                <div className={s.cardPrice}></div>
-                <div className={s.linksAndTitleBlock}>
+                <CardPrice id={paramsKey!} />
+                <div className={s.titleAndLinksBlock}>
                   <div className={s.title}>
                     <Typography variant={TypographyVariant.H6}>
                       Часто задаваемые вопросы
                     </Typography>
                   </div>
                   <div className={s.linksBlock}>
-                    <ul className={s.linksBlock}>
+                    <ul>
                       <Typography variant={TypographyVariant.Link} as={'li'}>
-                        <Link href={'/'}>Условия доставки</Link>
+                        <Link href={'/dilivery'}>Условия доставки</Link>
                       </Typography>
                       <Typography variant={TypographyVariant.Link} as={'li'}>
                         <Link href={'/'}>Возврат товаров</Link>

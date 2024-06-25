@@ -38,6 +38,7 @@
           & li {
             font-size: 14px;
             list-style-type: none;
+            font-weight: 300;
           }
           & li + li {
             margin-top: 10px;
@@ -47,15 +48,7 @@
 
       & .cardPriceAndLinksBlock {
         @include flex($direction: column);
-        & .cardPrice {
-          width: 374px;
-          height: 181px;
-          background: var(--color-light-100);
-          box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
-          border-radius: 4px;
-          //padding: 40px;
-        }
-        & .linksAndTitleBlock {
+        & .titleAndLinksBlock {
           padding-top: 20px;
           @include flex($direction: column, $gap: 12px);
 
