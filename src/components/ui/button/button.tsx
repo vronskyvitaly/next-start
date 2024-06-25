@@ -1,20 +1,30 @@
 'use client'
 import s from './button.module.scss'
 import cn from 'classnames'
+import { ReactNode } from 'react'
 
 type Props = {
-  title: string
+  title?: string
   disabled?: boolean
   onClick?: () => void
   widthMax?: boolean
-  bg?: 'green' | 'black' | 'blue' | 'white' | 'inBasket' | 'inBasketAndCounter'
+  bg?:
+    | 'green'
+    | 'greenV2'
+    | 'black'
+    | 'blue'
+    | 'white'
+    | 'inBasket'
+    | 'inBasketAndCounter'
+  children?: ReactNode
 }
 export const Button = ({
   title,
   disabled = false,
   onClick,
   widthMax = false,
-  bg = 'green'
+  bg = 'green',
+  children
 }: Props) => {
   const classNames = {
     root: () => {
@@ -25,10 +35,12 @@ export const Button = ({
           return cn(s.root, s.bgBlack)
         case 'blue':
           return cn(s.root, s.bgBlue)
+        case 'greenV2':
+          return cn(s.bgGreenV2)
         case 'white':
           return cn(s.root, s.bgWhite)
         case 'inBasket':
-          return cn(s.root, s.inBasket)
+          return children ? cn(s.children) : cn(s.root, s.inBasket)
         case 'inBasketAndCounter':
           return cn(s.root, s.inBasketAndCounter)
         default:
@@ -44,8 +56,8 @@ export const Button = ({
       disabled={disabled}
       className={classNames.root()}
     >
-      {bg === 'inBasket' || bg === 'inBasketAndCounter' ? (
-        <p className={s.title}>{title}</p>
+      {bg === 'inBasket' || bg === 'inBasketAndCounter' || bg === 'greenV2' ? (
+        <div className={children ? s.child : s.title}>{children || title}</div>
       ) : (
         title
       )}
