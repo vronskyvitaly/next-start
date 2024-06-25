@@ -33,6 +33,28 @@ export const rootSlice = createAppSlice({
           isModified: false
         }))
       }),
+      increaseOrDecreaseTheCounter: creators.reducer(
+        (
+          state,
+          action: PayloadAction<{
+            id: string
+            functionToIncreaseOrDecreaseTheCounter: (counter: number) => number
+          }>
+        ) => {
+          state.cardsState = state.cardsState.map(el =>
+            el._id === action.payload.id
+              ? {
+                  ...el,
+                  counter:
+                    action.payload.functionToIncreaseOrDecreaseTheCounter(
+                      el.counter
+                    )
+                }
+              : el
+          )
+          saveToLocalStorage(state.cardsState)
+        }
+      ),
       updateCardProperty: creators.reducer(
         (
           state,
@@ -54,7 +76,8 @@ export const rootSlice = createAppSlice({
   }
 })
 
-export const { saveCards, updateCardProperty } = rootSlice.actions
+export const { saveCards, increaseOrDecreaseTheCounter, updateCardProperty } =
+  rootSlice.actions
 
 export const {
   setCardsStateSelector,
