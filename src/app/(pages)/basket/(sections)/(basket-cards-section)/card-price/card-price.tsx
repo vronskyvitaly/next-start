@@ -1,6 +1,6 @@
 import s from './card-price.module.scss'
 import { Button, Typography } from '@componentsUI/*'
-import { TypographyVariant } from '@common/enums'
+import { TypographyVariant } from '@enum/*'
 import cn from 'classnames'
 import { useAppSelector } from '@common/hooks'
 import {

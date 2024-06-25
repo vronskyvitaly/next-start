@@ -1,7 +1,7 @@
 import s from './page.module.scss'
 import { Typography } from '@componentsUI/*'
-import { TypographyVariant } from '@enum/enums'
-import { BasketCardsSection } from '@components/sections/basket-cards-section'
+import { TypographyVariant } from '@enum/*'
+import { BasketCardsSection } from './(sections)'
 
 export const dynamic = 'force-dynamic'
 

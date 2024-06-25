@@ -55,7 +55,7 @@ export const CardProduct = ({
   }, [])
 
   enum IS_BASKET {
-    ON = 'в корзине',
+    ON = 'В корзине',
     OFF = 'В корзину'
   }
 

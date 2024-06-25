@@ -1,7 +1,8 @@
 'use client'
 import s from './basket-cards-section.module.scss'
-import { BasketCardsBlock } from '@components/sections/basket-cards-section/basket-cards-block'
-import { CardPrice } from '@components/sections/basket-cards-section/card-price'
+import { BasketCardsBlock } from './basket-cards-block'
+import { CardPrice } from './card-price'
+
 export const BasketCardsSection = () => {
   return (
     <section className={s.root}>

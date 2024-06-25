@@ -1,7 +1,7 @@
 'use client'
 import s from './card-section.module.scss'
 import { useSearchParams } from 'next/navigation'
-import { Card } from '@/app/api/cards/type'
+import { Card } from '@app/api/cards/type'
 import { DefaultImg, Typography } from '@componentsUI/*'
 import { TypographyVariant } from '@enum/*'
 import Link from 'next/link'
