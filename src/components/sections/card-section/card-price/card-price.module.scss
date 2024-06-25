@@ -1,0 +1,44 @@
+@import '@mixins/*';
+
+.root {
+  padding: 40px;
+  width: 374px;
+  height: 181px;
+  background: var(--color-light-100);
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 4px;
+
+  //padding: 40px;
+
+  & .flex {
+    @include flex($direction: column, $gap: 20px);
+
+    & .priceBlock {
+      @include flex($align: flex-end, $gap: 5px);
+
+      & .price {
+        &:after {
+          padding-left: 2px;
+          content: '\20BD';
+        }
+      }
+
+      .totalPriseWithDiscount {
+        &:after {
+          padding-left: 2px;
+          content: '\20BD';
+        }
+      }
+    }
+
+    & .inBasketCardBlock {
+      @include flex($gap: 10px);
+
+      & .inBasketAndCounterBlock {
+        @include flex($justify: space-between, $align: center);
+        min-width: 140px;
+        font-size: 12px;
+      }
+    }
+  }
+}
