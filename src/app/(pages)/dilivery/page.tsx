@@ -1,8 +1,7 @@
 import s from './page.module.scss'
-import { Header } from '@componentsUI/header'
-import { fetchCards } from '@components/sections/cards-section/actions'
+import { Header, Typography } from '@componentsUI/*'
+import { fetchCards } from '@app/(pages)/(home)/(sections)/(cards-section)/actions'
 import { TypographyVariant } from '@enum/*'
-import { Typography } from '@componentsUI/typography'
 
 export default async function Page() {
   const cards = await fetchCards()

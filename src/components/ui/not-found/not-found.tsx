@@ -1,5 +1,5 @@
 import s from './not-found.module.scss'
-import { CardsSection } from '@/components/sections/cards-section'
+import { CardsSection } from 'src/app/(pages)/(home)/(sections)/(cards-section)'
 import Link from 'next/link'
 
 export const NotFoundPageComponent = () => {

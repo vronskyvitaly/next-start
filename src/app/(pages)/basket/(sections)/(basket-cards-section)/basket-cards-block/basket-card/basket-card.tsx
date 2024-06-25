@@ -1,6 +1,6 @@
 import { Card } from '@app/api/cards/type'
 import s from './basket-card.module.scss'
-import { Typography, Button } from '@componentsUI/*'
+import { Typography, Button } from '@components/ui'
 import { TypographyVariant } from '@enum/*'
 import { AiFillDelete } from '@react-icons/all-files/ai/AiFillDelete'
 import { useAppDispatch, useAppSelector } from '@common/hooks'

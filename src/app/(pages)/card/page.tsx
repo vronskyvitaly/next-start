@@ -1,8 +1,8 @@
-import { CardSection } from '@components/sections/card-section/card-section'
-import { fetchCards } from '@components/sections/cards-section/actions'
+import { fetchCards } from '@app/(pages)/(home)/(sections)/(cards-section)/actions'
 import s from './page.module.scss'
 import { Metadata } from 'next'
 import { Header } from '@componentsUI/*'
+import { CardSection } from './(sections)'
 
 export const metadata: Metadata = {
   title: 'Card page',

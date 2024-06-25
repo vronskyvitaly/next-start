@@ -8,7 +8,7 @@ import {
 } from '@/lib/features/basket-slice'
 import { useEffect } from 'react'
 import { Card } from '@app/api/cards/type'
-import { BasketCard } from '@components/sections/basket-cards-section/basket-cards-block/basket-card'
+import { BasketCard } from './basket-card'
 import { useLocalStorage } from '@uidotdev/usehooks'
 
 export const BasketCardsBlock = () => {

@@ -1,4 +1,4 @@
-import { DefaultImg, Section } from '@/components'
+import { DefaultImg, Section } from '@componentsUI/*'
 import s from './baner-section.module.scss'
 export const BannerSection = () => {
   return (

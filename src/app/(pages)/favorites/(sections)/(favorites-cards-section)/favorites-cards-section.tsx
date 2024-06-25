@@ -2,7 +2,7 @@
 import s from './favorites-cards-sections.module.scss'
 import { useAppSelector } from '@common/hooks'
 import { setCardsStateSelector } from '@/lib/features/basket-slice'
-import { CardProduct } from '@/components'
+import { CardProduct } from '@componentsUI/*'
 
 export function FavoritesCardsSection() {
   const cards = useAppSelector(setCardsStateSelector)
