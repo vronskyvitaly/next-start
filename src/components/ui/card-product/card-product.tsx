@@ -174,7 +174,7 @@ export const CardProduct = ({
   return (
     <div className={s.root}>
       <Link
-        target={'_blank'}
+        // target={'_blank'}
         href={`/card?key=${id}`}
         className={s.actionWrapper}
       >
