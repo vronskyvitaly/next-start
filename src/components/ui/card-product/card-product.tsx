@@ -191,9 +191,15 @@ export const CardProduct = ({
         onClick={() => toggleInFavoritesStatus(id, isFavorites)}
       >
         {currentUrl !== '/favorites' ? (
-          <FavoriteIcon color={isFavorites ? COLOR.RED : COLOR.WHITE} />
+          <FavoriteIcon
+            color={isFavorites ? COLOR.RED : COLOR.WHITE}
+            size={1.5}
+          />
         ) : (
-          <FavoriteIcon color={isChanged ? COLOR.WHITE : COLOR.RED} />
+          <FavoriteIcon
+            color={isChanged ? COLOR.WHITE : COLOR.RED}
+            size={1.5}
+          />
         )}
       </div>
 
