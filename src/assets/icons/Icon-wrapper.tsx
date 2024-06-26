@@ -3,6 +3,7 @@ import { HTMLProps, ReactNode, SVGProps } from 'react'
 export type IconProps = {
   color?: string
   size?: number
+  count?: number
   svgProps?: SVGProps<SVGSVGElement>
 } & Omit<HTMLProps<HTMLSpanElement>, 'color' | 'size'>
 
@@ -12,6 +13,7 @@ export const IconWrapper = ({
   icon,
   color: colorProp,
   size: sizeProp,
+  count,
   ...restProps
 }: IconWrapperProps) => {
   const color = colorProp ? colorProp : 'currentColor'
@@ -22,6 +24,7 @@ export const IconWrapper = ({
       role='img'
       aria-hidden='true'
       style={{
+        position: 'relative',
         color: color,
         width: size,
         height: size,
@@ -31,6 +34,17 @@ export const IconWrapper = ({
       {...restProps}
     >
       {icon}
+      <p
+        style={{
+          position: 'absolute',
+          top: '-14px',
+          right: '-12px',
+          color: 'white',
+          fontSize: '12px'
+        }}
+      >
+        {count || ''}
+      </p>
     </span>
   )
 }
