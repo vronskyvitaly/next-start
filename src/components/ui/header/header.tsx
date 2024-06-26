@@ -1,6 +1,6 @@
 'use client'
 import s from './header.module.scss'
-import { Button, Form, IconsBlock, Input, Logo } from '@componentsUI/*'
+import { Button, Form, Input, Logo, Typography } from '@componentsUI/*'
 import Link from 'next/link'
 import { Card } from '@/app/api/cards/type'
 import { useEffect } from 'react'
@@ -12,6 +12,8 @@ import {
 } from '@/lib/features/basket-slice'
 import { useLocalStorage } from '@uidotdev/usehooks'
 import { useRouter } from 'next/navigation'
+import { BasketIcon, HeaderFavoriteIcon, UserIcon } from '@/assets/icons'
+import { TypographyVariant } from '@enum/*'
 
 type HeaderProps = {
   cards: Card[]
@@ -54,34 +56,24 @@ export const Header = ({ cards }: HeaderProps) => {
             <Button bg={'blue'} title={'Search'} />
           </Form>
           <div className={s.iconsBlock}>
-            <IconsBlock
-              subTitle={'Войти'}
-              srcImg={
-                'https://static.vecteezy.com/system/resources/thumbnails/004/798/846/small/shopping-cart-logo-or-icon-design-vector.jpg'
-              }
-            />
-            <Link href={'/favorites'} className={s.link}>
-              <IconsBlock
-                variant={'favorites'}
-                counter={countCardInFavorites}
-                subTitle={'Избранное'}
-                srcImg={
-                  'https://static.vecteezy.com/system/resources/thumbnails/004/798/846/small/shopping-cart-logo-or-icon-design-vector.jpg'
-                }
-              />
+            <Link href={'/'} className={s.link}>
+              <UserIcon size={1} />
+              <Typography variant={TypographyVariant.PV2}>Войти</Typography>
             </Link>
 
-            <div>
-              <Link href={'/basket'} className={s.link}>
-                <IconsBlock
-                  counter={countCardInBasket}
-                  subTitle={'Корзина'}
-                  srcImg={
-                    'https://static.vecteezy.com/system/resources/thumbnails/004/798/846/small/shopping-cart-logo-or-icon-design-vector.jpg'
-                  }
-                />
-              </Link>
-            </div>
+            <Link href={'/favorites'} className={s.link}>
+              <HeaderFavoriteIcon
+                count={countCardInFavorites}
+                color={'blur'}
+                size={1}
+              />
+              <Typography variant={TypographyVariant.PV2}>Избранное</Typography>
+            </Link>
+
+            <Link href={'/basket'} className={s.link}>
+              <BasketIcon color={'white'} count={countCardInBasket} size={1} />
+              <Typography variant={TypographyVariant.PV2}>Корзина</Typography>
+            </Link>
           </div>
         </div>
       </div>
