@@ -1,8 +1,10 @@
 {
   "compilerOptions": {
     "lib": ["dom", "dom.iterable", "esnext"],
+    "allowSyntheticDefaultImports": true,
     "allowJs": true,
     "skipLibCheck": true,
+    "composite": true,
     "strict": true,
     "noEmit": true,
     "esModuleInterop": true,
@@ -33,5 +35,6 @@
 
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src"],
-  "exclude": ["node_modules"]
+  // "include": ["next.config.mjs"]
+  "exclude": ["node_modules"],
 }
