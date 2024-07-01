@@ -29,6 +29,7 @@
       "@enum/*": ["./src/common/enums/enums"],
       "@features/*": ["./src/features/*"],
       "@componentsUI/*": ["./src/components/ui/index"],
+      "@utils/*": ["./src/common/utils"]
     },
 
 
