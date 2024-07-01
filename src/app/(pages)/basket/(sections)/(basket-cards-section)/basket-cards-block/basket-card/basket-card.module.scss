@@ -48,17 +48,9 @@
     width: 180px;
     @include flex($align: center, $gap: 6px);
     & .price {
-      &:after {
-        padding-left: 2px;
-        content: '\20BD';
-      }
     }
 
     & .discount {
-      &:after {
-        padding-left: 2px;
-        content: '\20BD';
-      }
     }
   }
 

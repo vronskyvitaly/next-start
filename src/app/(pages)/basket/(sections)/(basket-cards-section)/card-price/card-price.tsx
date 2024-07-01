@@ -7,6 +7,7 @@ import {
   setBasketCounterSelector,
   setCardsStateSelector
 } from '@/lib/features/basket-slice'
+import { convectorNumberUtil } from '@utils/*'
 
 export const CardPrice = () => {
   const counterBasketCards = useAppSelector(setBasketCounterSelector)
@@ -60,7 +61,7 @@ export const CardPrice = () => {
             variant={TypographyVariant.PriseV3}
             className={s.sumProduct}
           >
-            {totalSumWithDiscount()}
+            {convectorNumberUtil(totalSumWithDiscount())}
           </Typography>
         </div>
         <div className={cn(s.discountRow, s.row)}>
@@ -69,7 +70,7 @@ export const CardPrice = () => {
             variant={TypographyVariant.PriseV3}
             className={s.discount}
           >
-            -{calculateTotalDiscount()}
+            -{convectorNumberUtil(calculateTotalDiscount())}
           </Typography>
         </div>
       </div>
@@ -83,7 +84,7 @@ export const CardPrice = () => {
           as={'h4'}
           className={s.totalAmount}
         >
-          {totalSumWithOutDiscount()}
+          {convectorNumberUtil(totalSumWithOutDiscount())}
         </Typography>
       </div>
     </div>

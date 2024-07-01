@@ -9,6 +9,7 @@ import {
   updateCardProperty
 } from '@/lib/features/basket-slice'
 import { useLocalStorage } from '@uidotdev/usehooks'
+import { convectorNumberUtil } from '@utils/*'
 
 type Props = {
   card: Card
@@ -86,13 +87,13 @@ export const BasketCard = ({ card, removingCardFromTheBasket }: Props) => {
         </div>
         <div className={s.priceAndDiscountBlock}>
           <Typography className={s.price} variant={TypographyVariant.PriseV3}>
-            {totalPrice}
+            {convectorNumberUtil(totalPrice)}
           </Typography>
           <Typography
             className={s.discount}
             variant={TypographyVariant.PriseV4}
           >
-            {totalPriseWithDiscount}
+            {convectorNumberUtil(totalPriseWithDiscount)}
           </Typography>
         </div>
         <div className={s.counterBlock}>

@@ -6,6 +6,7 @@ import { useAppDispatch } from '@common/hooks'
 import { updateCardProperty } from '@/lib/features/basket-slice'
 import { FavoriteIcon } from '@/assets/icons'
 import { useEffect, useState } from 'react'
+import { convectorNumberUtil } from '@utils/*'
 
 type Props = {
   id: string
@@ -180,8 +181,10 @@ export const CardProduct = ({
       >
         <DefaultImg />
         <span className={s.cardBlockPrice}>
-          <p className={s.price}>{price}</p>
-          <span className={s.discount}>{discount + price}</span>
+          <p className={s.price}>{convectorNumberUtil(price)}</p>
+          <span className={s.discount}>
+            {convectorNumberUtil(discount + price)}
+          </span>
         </span>
         <p className={s.title}>{title}</p>
       </Link>
