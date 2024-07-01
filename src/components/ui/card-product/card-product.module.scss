@@ -33,13 +33,6 @@
       & .price {
         font-weight: bold;
         font-size: 14px;
-
-        // Ruble Symbol https://symbl.cc/ru/20BD/
-        &:after {
-          padding-left: 2px;
-          content: '\20BD';
-          font-size: 15px;
-        }
       }
 
       & .discount {
@@ -47,13 +40,6 @@
         padding-left: 4px;
         font-weight: 400;
         font-size: 12px;
-
-        // Ruble Symbol https://symbl.cc/ru/20BD/
-        &:after {
-          padding-left: 2px;
-          content: '\20BD';
-          font-size: 13px;
-        }
       }
     }
 

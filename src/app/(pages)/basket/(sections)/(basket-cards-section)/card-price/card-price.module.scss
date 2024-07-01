@@ -1,4 +1,4 @@
-@import '../../../../../../styles/mixins';
+@import '@mixins/*';
 
 .cardPrice {
   position: sticky;
@@ -38,20 +38,12 @@
         right: 0;
       }
       & .sumProduct {
-        &:after {
-          content: '₽';
-          margin-left: 5px;
-        }
       }
     }
 
     & .discountRow {
       & .discount {
         color: var(--color-danger-500);
-        &:after {
-          content: '₽';
-          margin-left: 5px;
-        }
       }
     }
   }
@@ -62,11 +54,6 @@
 
     & .totalAmount {
       color: var(--color-success-500);
-
-      &:after {
-        content: '₽';
-        margin-left: 5px;
-      }
     }
   }
 }
