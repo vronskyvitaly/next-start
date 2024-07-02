@@ -57,7 +57,7 @@ export const Header = ({ cards }: HeaderProps) => {
           </Form>
           <div className={s.iconsBlock}>
             <Link href={'/'} className={s.link}>
-              <UserIcon size={1} />
+              <UserIcon size={1} className={s.icon} />
               <Typography variant={TypographyVariant.PV2}>Войти</Typography>
             </Link>
 
@@ -66,12 +66,18 @@ export const Header = ({ cards }: HeaderProps) => {
                 count={countCardInFavorites}
                 color={'blur'}
                 size={1}
+                className={s.icon}
               />
               <Typography variant={TypographyVariant.PV2}>Избранное</Typography>
             </Link>
 
             <Link href={'/basket'} className={s.link}>
-              <BasketIcon color={'white'} count={countCardInBasket} size={1} />
+              <BasketIcon
+                color={'white'}
+                count={countCardInBasket}
+                size={1}
+                className={s.icon}
+              />
               <Typography variant={TypographyVariant.PV2}>Корзина</Typography>
             </Link>
           </div>

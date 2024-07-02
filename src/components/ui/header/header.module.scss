@@ -12,18 +12,34 @@
   }
 
   & .iconsBlock {
-    display: flex;
+    @include flex($gap: 21px);
     color: var(--color-light-100);
-    gap: 21px;
-  }
+    & .link {
+      @include flex(
+        $direction: column,
+        $justify: center,
+        $align: center,
+        $gap: 8px,
+        $wrap: nowrap
+      );
+      text-decoration: none;
+      color: var(--color-light-100);
 
-  & .link {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 4px;
-    flex-direction: column;
-    text-decoration: none;
-    color: var(--color-light-100);
+      & .icon {
+        z-index: 3;
+        position: relative;
+        &:after {
+          position: absolute;
+          content: '';
+          width: 24px;
+          height: 24px;
+          border-radius: 50%;
+          border: 1px solid var(--color-light-100);
+          z-index: 1;
+          right: -4px;
+          top: -3px;
+        }
+      }
+    }
   }
 }
