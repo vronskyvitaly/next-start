@@ -14,7 +14,7 @@ export const HeaderFavoriteIcon = (allProps: IconProps) => {
       icon={
         <svg
           width='100%'
-          height='110%'
+          height='120%'
           viewBox='0 0 25 25'
           fill='none'
           xmlns='http://www.w3.org/2000/svg'
